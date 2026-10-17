@@ -62,14 +62,28 @@
 
 ---
 
+<p align="center">
+  <img src="assets/evidence/m2_motorway_pileup.jpg" width="49%" alt="M-2 Motorway Fog Pileup Collision" />
+  <img src="assets/evidence/rescue1122_truck_extrication.jpg" width="49%" alt="Rescue 1122 Extrication Operation on Multan-Sukkur Motorway" />
+</p>
+<p align="center">
+  <em>Figure 1: Empirical Ground Reality — Multi-vehicle pileups and Rescue 1122 extrication operations across Punjab Motorways (M-2, M-5, M-11) during severe winter fog and chemical dew events.</em>
+</p>
+
+---
+
 ## 1. Executive Summary
 
 Every year between November and February, eastern Punjab and the inter-city motorway networks of Pakistan (M-2 Lahore-Islamabad, M-11 Sialkot Motorway, GT Road / N-5, Lahore Ring Road, and M-4 Pindi Bhattian-Multan) are engulfed by catastrophic winter smog.
 
 Prevailing consumer mobile applications categorize winter smog exclusively as an **Air Quality Index (AQI)** health metric, advising citizens on face masks and air purifiers. However, empirical emergency data from Punjab Emergency Service (Rescue 1122) and the National Highways & Motorway Police (NHMP) demonstrates that on high-speed motorways, winter smog acts as a **mass-casualty kinetic collision hazard**:
-- Rescue 1122 dispatches surge by **+34.8%** during the winter smog window, overwhelmingly driven by multi-vehicle rear-end chain collisions.
-- Cold overnight humidity mixes with suspended particulate matter ($PM_{2.5} > 400 \ \mu\text{g/m}^3$), generating an oily "chemical dew" layer on asphalt that drops tire friction coefficients from $f = 0.70$ down to **$f = 0.28$**.
-- High-beam headlight illumination creates dense aerosol backscatter, producing optical whiteout that expands driver perception-reaction time ($t_r$) from $1.5s$ to **$2.85s$**.
+- **Mass Pileups Documented in National Media**:
+  - *Dawn News (Dec 9, 2025)*: [7 injured as 6 trailer trucks collide on Multan-Sukkur Motorway due to fog: Rescue 1122](https://www.dawn.com/news/1960107/7-injured-as-6-trailer-trucks-collide-on-multan-sukkur-motorway-due-to-fog-rescue-1122) (Imran Gabol).
+  - *Pakistan Today (Dec 22, 2021)*: [At least three dead, several injured as fog causes M-2 motorway pile-up](https://www.pakistantoday.com.pk/2021/12/22/at-least-three-dead-several-injured-as-fog-causes-m-2-motorway-pile-up).
+  - *Dawn News (Nov 4, 2016)*: [16 die in accidents caused by fog in Punjab](https://www.dawn.com/news/1294136/16-die-in-accidents-caused-by-fog-in-punjab) (Intikhab Hanif).
+- **Rescue 1122 Emergency Dispatch Spike**: Emergency traffic dispatches surge by **+34.8%** during the winter smog window, overwhelmingly dominated by multi-vehicle rear-end chain collisions.
+- **Chemical Dew Friction Collapse**: Cold overnight humidity mixes with suspended particulate matter ($PM_{2.5} > 400 \ \mu\text{g/m}^3$), generating an oily "chemical dew" layer on asphalt that drops tire friction coefficients from $f = 0.70$ down to **$f = 0.28$** (a greasy slick).
+- **High-Beam Aerosol Backscatter**: Headlights bounce off suspended carbon aerosols directly into driver retinas, destroying contrast sensitivity and expanding perception-reaction time ($t_r$) from $1.5s$ to **$2.85s$**.
 
 **SafarGuard** bridges this critical safety gap by fusing **AASHTO Stopping Sight Distance (SSD) vehicle dynamics** with **Google DeepMind's Gemma 4 multimodal vision engine**. Rather than relying on generic weather reports, SafarGuard continuously audits forward dashcam feeds, calculates the deterministic Crash Probability Index ($CPI$), solves for dynamic quadratic safe speed limits, and issues audible Roman Urdu tactical warnings before drivers outdrive their stopping horizon.
 
@@ -84,6 +98,14 @@ It is 10:45 PM on December 14. **Usman**, a 34-year-old software architect, is d
 - At the Kallar Kahar descent, the night sky is relatively clear, and Usman is maintaining a legal cruising speed of **100 km/h**.
 - Traditional navigation applications report normal traffic flow with green lines, as there are no stationary traffic jams ahead.
 - As the vehicle crosses into the agricultural flatlands near **Sheikhupura and Babu Sabu**, the temperature plummets to 6°C with 94% relative humidity.
+
+<p align="center">
+  <img src="assets/evidence/nhmp_police_fog_patrol.jpg" width="49%" alt="NHMP Officer Guiding Traffic in Zero-Visibility Fog" />
+  <img src="assets/evidence/lahore_ring_road_smog.jpg" width="49%" alt="Dense Winter Smog Clouding Lahore Arterials" />
+</p>
+<p align="center">
+  <em>Figure 2: Ground Reality at 10:45 PM — NHMP officers battling zero-visibility optical whiteout near Babu Sabu as relative humidity reaches 94%.</em>
+</p>
 
 ### The Invisible Hazard
 1. **Chemical Dew Slick**: Unburned agricultural smoke aerosols ($PM_{2.5} \approx 480 \ \mu\text{g/m}^3$) precipitate onto the cold asphalt, creating a microscopic greasy film. Usman cannot see that the friction coefficient between his radial tires and the road has collapsed from **$f = 0.70$ to $f = 0.28$**.
@@ -118,6 +140,13 @@ Official highway crash registries maintained by Rescue 1122 and NHMP show clear 
 | **GT Road / N-5 (Kala Shah Kaku)** | Mixed heavy freight & commuter traffic | 20:00 - 06:00 | 0.34 - 0.38 | Unlit tractor-trolleys, pedestrian crossings |
 | **Lahore Ring Road (SL-1 to SL-3)** | Urban interchange bottlenecks | 21:00 - 04:00 | 0.32 - 0.35 | Sudden tail-end decelerations |
 | **M-4 (Pindi Bhattian to Faisalabad)** | Rural agricultural smoke plumes | 00:00 - 06:30 | 0.27 - 0.31 | Heavy sugarcane freight breakdowns |
+
+<p align="center">
+  <img src="assets/evidence/punjab_highway_bus_crash.jpg" width="85%" alt="Fatal Highway Bus and Freight Crash in Dense Punjab Fog" />
+</p>
+<p align="center">
+  <em>Figure 3: Mass Casualty Consequence — Fatal passenger bus and freight collision along Punjab highway corridors resulting from unlit obstacle outdriving and friction collapse.</em>
+</p>
 
 ---
 
