@@ -33,6 +33,11 @@
   <a href="LICENSE"><strong>LICENSE</strong></a>
 </p>
 
+| Layer / Interface | Target Production Platform | Architecture & Scope | Target Access Link |
+| :--- | :--- | :--- | :--- |
+| **Driver & Public Web App** | **Vercel** (Edge Static CDN) | React 19, Leaflet Punjab Motorway Radar, Night HUD | [`https://safarguard.vercel.app`](https://github.com/Javeriaf19/SafarGuard) |
+| **Physics & AI Engine Core** | **Streamlit Community Cloud** | Python 3.12, AASHTO Solver, Gemma 4 Vision Pipeline | [`https://safarguard.streamlit.app`](https://github.com/Javeriaf19/SafarGuard) |
+
 </div>
 
 ---
@@ -249,7 +254,7 @@ SafarGuard was developed using advanced agentic AI coding tooling, high-performa
 | **Data Processing & Analytics** | **Pandas** & **NumPy** | Tabular processing, empirical friction degradation modeling, and Rescue 1122 crash log aggregation. |
 | **Agent Skill Open Standard** | **`SKILL.md` Specification** | Standardized tool descriptor allowing external autonomous AI agents to discover and invoke SafarGuard telemetry. |
 | **Version Control & CI/CD** | **Git** & **GitHub CLI (`gh`)** | Automated repository version control, branch management, and GitHub synchronization. |
-| **Production Deployment Targets** | **Vercel** (Frontend) + **Railway** (Backend) | Cloud edge deployment architecture for decoupled frontend static hosting and backend Python microservices. |
+| **Production Deployment Targets** | **Vercel** (Frontend) + **Streamlit Community Cloud** (Backend) | 100% Free permanent production hosting: static edge hosting on Vercel and zero-cost Python AI microservice on Streamlit Cloud. |
 
 ---
 
@@ -364,7 +369,7 @@ Located in [`app.py`](app.py), the backend provides high-performance simulation 
 ### 7.5 Unified Architecture & Service Interconnection
 The frontend and backend communicate seamlessly:
 - **Development**: The React web client runs on `http://localhost:5173` while the Python simulation engine runs on `http://localhost:8501`.
-- **Production Architecture**: The frontend compiles to static optimized assets deployed on **Vercel**, while the backend Python engine deploys on **Railway** or **Google Cloud Run**. The frontend consumes live telemetry via REST API calls and server-sent events, providing a unified single-URL experience for judges and end users.
+- **Production Architecture**: The frontend compiles to static optimized assets deployed on **Vercel** (`https://safarguard.vercel.app`), while the backend Python physics and vision engine deploys 100% free on **Streamlit Community Cloud** (`https://safarguard.streamlit.app`). The frontend integrates direct cross-launch navigation and interactive physics labs, providing judges with a unified, zero-friction evaluation experience.
 
 ---
 
