@@ -22,6 +22,8 @@
   <a href="README.md"><strong>README</strong></a> |
   <a href="SLIDES.md"><strong>SLIDES</strong></a> |
   <a href="DATASETS.md"><strong>DATASETS</strong></a> |
+  <a href="SKILL.md"><strong>SKILL STANDARD</strong></a> |
+  <a href="FAQ.md"><strong>FAQS & EVALUATION</strong></a> |
   <a href="CONTRIBUTING.md"><strong>CONTRIBUTING</strong></a> |
   <a href="SECURITY.md"><strong>SECURITY</strong></a> |
   <a href="CODE_OF_CONDUCT.md"><strong>CODE OF CONDUCT</strong></a> |
