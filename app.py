@@ -38,18 +38,41 @@ st.set_page_config(
 
 # Sidebar Configuration for API Key
 st.sidebar.markdown("### 🛡️ SafarGuard Settings")
-st.sidebar.markdown("**Google AI Studio API Key**")
+st.sidebar.markdown("**AI Vision Engine Configuration**")
 api_key_input = st.sidebar.text_input(
-    "Gemini / Gemma 4 API Key",
+    "Google Gemini / Gemma 4 Key",
     value=os.environ.get("GEMINI_API_KEY", ""),
     type="password",
     help="Paste your key from https://aistudio.google.com/ or add it to G:\\SafeGuard\\.env"
 )
 if api_key_input:
     os.environ["GEMINI_API_KEY"] = api_key_input
-    st.sidebar.success("API Key Active")
+    st.sidebar.success("Gemini API Active")
 else:
-    st.sidebar.info("Tip: Paste key here or in G:\\SafeGuard\\.env")
+    st.sidebar.info("Tip: Set GEMINI_API_KEY in .env")
+
+# Model Selection Support
+active_model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+model_options = ["gemini-2.5-flash", "gemini-1.5-flash", "gemma-4-31b", "groq/llama-3.3-70b-versatile"]
+model_index = model_options.index(active_model) if active_model in model_options else 0
+
+selected_model = st.sidebar.selectbox(
+    "Active Vision / LLM Model",
+    model_options,
+    index=model_index,
+    help="Supports GEMINI_MODEL environment variable"
+)
+os.environ["GEMINI_MODEL"] = selected_model
+
+# Groq Fallback Support
+groq_key_input = st.sidebar.text_input(
+    "Groq Cloud Key (Fallback)",
+    value=os.environ.get("GROQ_API_KEY", ""),
+    type="password",
+    help="Optional fallback from https://console.groq.com/"
+)
+if groq_key_input:
+    os.environ["GROQ_API_KEY"] = groq_key_input
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("**Active Prize Tracks:**")
@@ -674,8 +697,11 @@ with col_v2:
                         "5. AASHTO recommended safe speed cap in km/h. Return your concise analysis and a Roman Urdu voice alert string."
                     )
                     if img_to_audit:
+                        target_model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+                        if "groq" in target_model.lower():
+                            target_model = "gemini-2.5-flash"
                         response = client.models.generate_content(
-                            model="gemini-2.5-flash",
+                            model=target_model,
                             contents=[img_to_audit, prompt]
                         )
                         st.success("Gemma 4 Multimodal Audit Complete:")
