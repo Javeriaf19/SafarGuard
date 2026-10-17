@@ -24,8 +24,8 @@
   --green: #397c57;
   --dark-line: #3c4444;
   --mono: "Fira Code", monospace;
-  --body: "Barlow", sans-serif;
-  --display: "Barlow Condensed", sans-serif;
+  --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --display: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * { box-sizing: border-box; }

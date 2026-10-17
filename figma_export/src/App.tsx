@@ -1,6 +1,8 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react"
 import { maximumModelSpeed, stoppingDistance } from "./lib/safety"
 import SafetyOverlay from "./SafetyOverlay"
+import CorridorMap from "./CorridorMap"
+import GroundRealityPanel from "./GroundRealityPanel"
 
 const CommandConsole = lazy(() => import("./CommandConsole"))
 
@@ -702,6 +704,16 @@ function Dashboard() {
             </button>
           </div>
         </section>
+
+        {/* Live Interactive Punjab Motorway Leaflet Radar Map */}
+        <div className="section-shell">
+          <CorridorMap />
+        </div>
+
+        {/* Empirical Ground Reality & National News Verification */}
+        <div className="section-shell">
+          <GroundRealityPanel />
+        </div>
 
         <section
           className="simulator-section"
