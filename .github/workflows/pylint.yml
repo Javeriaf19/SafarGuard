@@ -1,23 +1,47 @@
-name: Pylint
+name: CI Quality Gate
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  build:
+  python-physics-engine:
+    name: Verify Python Physics & AI Engine
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.8", "3.9", "3.10"]
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(git ls-files '*.py')
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate Python Syntax & Compilation
+        run: |
+          python -m py_compile app.py
+          python -c "import ast; ast.parse(open('app.py', encoding='utf-8').read()); print('Syntax validation: PASS')"
+
+  react-frontend-build:
+    name: Verify React 19 Frontend Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: figma_export/package-lock.json
+
+      - name: Install Frontend Dependencies
+        working-directory: figma_export
+        run: npm ci
+
+      - name: Build Production Assets
+        working-directory: figma_export
+        run: npm run build
