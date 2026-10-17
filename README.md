@@ -249,6 +249,8 @@ SafarGuard was developed using advanced agentic AI coding tooling, high-performa
 | **Frontend Framework** | **React 19** + **TypeScript** | High-performance reactive user interface with strict typing and concurrent rendering capabilities. |
 | **Build & Bundling Engine** | **Vite 6** | Ultra-fast bundling, instant Hot Module Replacement (HMR), and optimized production tree-shaking. |
 | **Styling & Design System** | **Tailwind CSS** | Custom zero-glare OLED night-mode color palette (`#050811`, `#0a1124`, cyan `#06b6d4`, amber `#f59e0b`, emergency red `#ef4444`). |
+| **Interactive Geospatial Mapping** | **Leaflet.js** + **CartoDB Dark Matter** | 100% free open-source interactive mapping with zero API key dependencies, rendering Punjab motorway risk corridors and real-time incident markers. |
+| **Live Environmental Telemetry** | **Open-Meteo Weather API** | Free, open-access meteorological API querying high-precision temperature, relative humidity, and dew point across Punjab motorway coordinates to calculate real-time chemical dew slick risk. |
 | **Iconography & Visual Assets** | **Lucide React** | Lightweight, clean SVG vector iconography across all 5 stakeholder views. |
 | **Backend & Physics Core** | **Python 3.12** + **Streamlit** | Deterministic AASHTO physics engine, real-time quadratic safe-speed calculation, and interactive telemetry simulator. |
 | **Data Processing & Analytics** | **Pandas** & **NumPy** | Tabular processing, empirical friction degradation modeling, and Rescue 1122 crash log aggregation. |
@@ -350,8 +352,15 @@ flowchart LR
 ### 7.3 Frontend: High-Performance React Web Application
 Located in [`figma_export/`](figma_export/), the frontend is engineered using modern web technologies:
 - **Core Framework**: React 19 with TypeScript, bundled with Vite for near-instant hot module replacement and production tree-shaking.
-- **Styling Architecture**: Tailwind CSS with customized dark OLED palettes (`#050811`, `#0a1124`, cyan `#06b6d4`, amber `#f59e0b`, emergency red `#ef4444`).
-- **Iconography**: Lucide React iconography for responsive vector rendering across all viewports.
+- **Styling Architecture**: Tailwind CSS with customized dark OLED palettes (`#050811`, `#0a1124`, cyan `#06b6d4`, amber `#f59e0b`, emergency red `#ef4444`) and modern typography (Google Fonts Inter and Poppins).
+- **Interactive Geospatial Radar (`CorridorMap.tsx`)**:
+  - Implemented using **Leaflet.js** and **CartoDB Dark Matter** vector tiles, operating 100% free with zero API key requirements.
+  - Renders live Punjab Motorway risk polylines: **M-2 Lahore-Islamabad** (critical red hazard polyline) and **M-11 Sialkot Motorway** (amber elevated hazard polyline).
+  - Features 5 interactive incident markers with popup diagnostics: Babu Sabu (28m visibility, zero-visibility dew slick), Kala Shah Kaku (45m visibility), Sheikhupura (32m visibility), Muridke (65m visibility), and Sambrial (55m visibility).
+  - Fetches real-time environmental atmospheric conditions from the **Open-Meteo Weather API** across Punjab coordinates to compute live dew points and chemical dew risk.
+- **Empirical Ground Reality & Evidence Panel (`GroundRealityPanel.tsx`)**:
+  - Displays verified highway crash reports cited from national publications (*Dawn News*, *Pakistan Today*) with direct source links.
+  - Features an interactive AASHTO stopping distance calculator with live friction sliders comparing dry asphalt ($f = 0.70$), wet pavement ($f = 0.45$), and chemical dew smog slicks ($f = 0.28$).
 - **Component Ecosystem**:
   1. `CorridorMonitor`: Live telemetry table for M-2, M-11, N-5, LRR, and M-4 with active closure statuses.
   2. `DriverCareemCompanion`: Mobile-optimized in-cab heads-up interface with live hazard proximity alerts and one-tap SOS dispatch.
@@ -363,13 +372,29 @@ Located in [`figma_export/`](figma_export/), the frontend is engineered using mo
 Located in [`app.py`](app.py), the backend provides high-performance simulation and AI auditing:
 - **Runtime Environment**: Python 3.12 with Streamlit application framework for rapid real-time telemetry rendering.
 - **Physics Computations**: Deterministic implementation of AASHTO stopping distance formulas, friction degradation curves, and quadratic safe speed ceilings.
+- **Live Environmental Ingestion**: Queries Open-Meteo API for real-time temperature, humidity, and dew point across Punjab motorway hubs, computing the dynamic chemical dew slick coefficient ($f = 0.70 \to 0.28$).
 - **Google DeepMind Gemma 4 Vision Integration**: Leverages the official Google GenAI SDK to send windshield imagery to `gemma-4-31b` or `gemini-2.5-flash` for optical density classification, high-beam backscatter detection, and unlit obstacle localization.
 - **Telemetry Endpoints**: RESTful JSON serialization enabling external connected-car applications and highway overhead digital signs (VMS) to consume corridor speed recommendations.
 
-### 7.5 Unified Architecture & Service Interconnection
-The frontend and backend communicate seamlessly:
-- **Development**: The React web client runs on `http://localhost:5173` while the Python simulation engine runs on `http://localhost:8501`.
-- **Production Architecture**: The frontend compiles to static optimized assets deployed on **Vercel** (`https://safarguard.vercel.app`), while the backend Python physics and vision engine deploys 100% free on **Streamlit Community Cloud** (`https://safarguard.streamlit.app`). The frontend integrates direct cross-launch navigation and interactive physics labs, providing judges with a unified, zero-friction evaluation experience.
+### 7.5 Unified Architecture & Dual-Method Service Interconnection
+The Vercel-hosted frontend and the Streamlit Community Cloud backend communicate seamlessly through a dual-channel interconnection architecture:
+
+#### Method 1: Header Direct Navigation CTA
+- **Location**: Top navigation bar of the React web application (`figma_export/src/App.tsx`).
+- **Functionality**: Features a prominent high-contrast action button labeled `AI Physics Core`.
+- **Target**: Launches the full-screen Streamlit application at `https://safarguard.streamlit.app` in a dedicated browser tab with target `_blank` and `rel="noopener noreferrer"`.
+- **Use Case**: Allows judges and safety operators to inspect the standalone Python telemetry dashboard, run manual benchmark suites, and upload custom dashcam imagery in an unrestricted desktop viewport.
+
+#### Method 2: Live In-Page Interactive Embed (Iframe Integration)
+- **Location**: Dedicated section `03 / LIVE CLOUD PYTHON ENGINE (STREAMLIT COMMUNITY CLOUD)` embedded directly between the Stopping Distance Lab and Research Methodology sections in `figma_export/src/App.tsx`.
+- **Functionality**: Renders `<iframe src="https://safarguard.streamlit.app/?embed=true" />` within an OLED dark-themed container (`#050811`) with responsive min-height and zero border distraction.
+- **Target**: Directly embeds the live cloud-hosted Streamlit engine inside the Vercel portal.
+- **Use Case**: Enables hackathon evaluators to interactively adjust AASHTO stopping kinematic sliders, inspect live Open-Meteo atmospheric telemetry, and trigger Gemma 4 vision evaluations without ever leaving the primary Vercel web application.
+
+#### Supplementary Cross-Navigation
+- **Site Footer**: Direct cross-links embedded in the site footer (`Live Streamlit AI Core`) for one-click access across all views.
+- **Local Development**: The React web client runs on `http://localhost:5173` while the Python simulation engine runs on `http://localhost:8501`.
+- **Production Architecture**: The frontend compiles to static optimized assets deployed on **Vercel** (`https://safarguard.vercel.app`), while the backend Python physics and vision engine deploys 100% free on **Streamlit Community Cloud** (`https://safarguard.streamlit.app`).
 
 ---
 
