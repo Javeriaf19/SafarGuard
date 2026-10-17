@@ -4,12 +4,17 @@ import L from "leaflet"
 interface CorridorPoint {
   id: string
   name: string
+  shortLabel: string
   coords: [number, number]
   corridor: string
   cpi: number
   safeSpeed: number
   visibility: number
   friction: number
+  aqi: number
+  pm25: number
+  smogSeverity: "EXTREME" | "VERY HIGH" | "HIGH" | "MODERATE"
+  smogPeakHour: string
   status: "CRITICAL" | "ELEVATED" | "MODERATE"
   hazard: string
 }
@@ -18,60 +23,85 @@ const CORRIDOR_POINTS: CorridorPoint[] = [
   {
     id: "babu-sabu",
     name: "M-2 Babu Sabu Interchange",
+    shortLabel: "Babu Sabu (M-2)",
     coords: [31.5369, 74.2447],
     corridor: "M-2 Lahore-Islamabad",
     cpi: 5.40,
     safeSpeed: 35,
     visibility: 35,
     friction: 0.28,
+    aqi: 512,
+    pm25: 485,
+    smogSeverity: "EXTREME",
+    smogPeakHour: "10:30 PM – 06:30 AM",
     status: "CRITICAL",
     hazard: "Chemical dew asphalt slick, multi-vehicle deceleration zone",
   },
   {
     id: "kot-abdul-malik",
     name: "M-2 Kot Abdul Malik Exit",
+    shortLabel: "Kot Abdul Malik (M-2)",
     coords: [31.6258, 74.2081],
     corridor: "M-2 Motorway",
     cpi: 5.14,
     safeSpeed: 38,
     visibility: 40,
     friction: 0.29,
+    aqi: 488,
+    pm25: 450,
+    smogSeverity: "EXTREME",
+    smogPeakHour: "11:00 PM – 07:00 AM",
     status: "CRITICAL",
     hazard: "Verified 2025 multi-trailer collision cluster; zero natural wind",
   },
   {
     id: "sheikhupura-flats",
     name: "M-2 Sheikhupura Agri-Zone",
+    shortLabel: "Sheikhupura (M-2)",
     coords: [31.7167, 73.9850],
     corridor: "M-2 Motorway",
     cpi: 4.85,
     safeSpeed: 40,
     visibility: 45,
     friction: 0.30,
+    aqi: 465,
+    pm25: 430,
+    smogSeverity: "VERY HIGH",
+    smogPeakHour: "09:45 PM – 07:15 AM",
     status: "CRITICAL",
     hazard: "Unlit freight & sugarcane tractor-trolley crossing zone",
   },
   {
     id: "kala-shah-kaku",
     name: "M-11 Kala Shah Kaku Junction",
+    shortLabel: "Kala Shah Kaku (M-11)",
     coords: [31.7245, 74.2691],
     corridor: "M-11 Sialkot Motorway",
     cpi: 3.65,
     safeSpeed: 52,
     visibility: 65,
     friction: 0.32,
+    aqi: 395,
+    pm25: 360,
+    smogSeverity: "HIGH",
+    smogPeakHour: "11:30 PM – 06:00 AM",
     status: "ELEVATED",
     hazard: "Dense rice-husk particulate smog plume; industrial aerosol layer",
   },
   {
     id: "lrr-southern",
     name: "Lahore Ring Road (SL-2 Lake City)",
+    shortLabel: "Lake City (Ring Road)",
     coords: [31.3850, 74.2540],
     corridor: "Lahore Ring Road",
     cpi: 2.15,
     safeSpeed: 68,
     visibility: 95,
     friction: 0.36,
+    aqi: 310,
+    pm25: 280,
+    smogSeverity: "MODERATE",
+    smogPeakHour: "01:00 AM – 05:30 AM",
     status: "MODERATE",
     hazard: "Urban interchange tailback risks under midnight fog",
   },
@@ -235,25 +265,34 @@ export default function CorridorMap() {
           </h3>
         </div>
 
-        {/* Live Weather Indicator */}
-        <div className="flex items-center gap-4 bg-slate-900/80 border border-slate-800 px-4 py-2 rounded-xl text-xs font-mono">
+        {/* Live Weather & Smog Indicators */}
+        <div className="flex flex-wrap items-center gap-3 bg-slate-900/80 border border-slate-800 px-4 py-2.5 rounded-xl text-xs font-mono">
           <div>
-            <span className="text-slate-400 block">Corridor Temperature</span>
+            <span className="text-slate-400 block text-[11px]">Corridor Temp</span>
             <span className="text-white font-bold text-sm">
               {weatherLoading ? "Syncing..." : liveWeather ? `${liveWeather.temp}°C` : "6.4°C"}
             </span>
           </div>
-          <div className="w-px h-6 bg-slate-700"></div>
+          <div className="w-px h-6 bg-slate-700 hidden sm:block"></div>
           <div>
-            <span className="text-slate-400 block">Relative Humidity</span>
+            <span className="text-slate-400 block text-[11px]">Relative Humidity</span>
             <span className="text-amber-400 font-bold text-sm">
               {weatherLoading ? "Syncing..." : liveWeather ? `${liveWeather.humidity}%` : "94% (Chemical Dew)"}
             </span>
           </div>
-          <div className="w-px h-6 bg-slate-700"></div>
+          <div className="w-px h-6 bg-slate-700 hidden sm:block"></div>
           <div>
-            <span className="text-slate-400 block">Provider</span>
-            <span className="text-cyan-400 font-bold text-xs">OpenStreetMap + Open-Meteo</span>
+            <span className="text-slate-400 block text-[11px]">Live Smog & AQI</span>
+            <span className="text-red-400 font-bold text-sm">
+              {selectedPoint.aqi} AQI · {selectedPoint.smogSeverity}
+            </span>
+          </div>
+          <div className="w-px h-6 bg-slate-700 hidden sm:block"></div>
+          <div>
+            <span className="text-slate-400 block text-[11px]">Overnight Inversion</span>
+            <span className="text-amber-300 font-bold text-xs">
+              {selectedPoint.smogPeakHour}
+            </span>
           </div>
         </div>
       </div>
@@ -265,8 +304,8 @@ export default function CorridorMap() {
           <div ref={mapContainerRef} className="w-full h-full min-h-[440px]" />
           
           {/* Map Overlay Badge */}
-          <div className="absolute bottom-3 left-3 z-[1000] bg-slate-950/90 backdrop-blur-md border border-slate-800 text-[10px] text-slate-300 font-mono px-3 py-1.5 rounded-lg pointer-events-none shadow-lg">
-            <span>🔴 M-2 Critical Slick (f = 0.28) | 🟡 M-11 High Glare (f = 0.32)</span>
+          <div className="absolute bottom-3 left-3 z-[1000] bg-slate-950/90 backdrop-blur-md border border-slate-800 text-xs text-slate-300 font-mono px-3.5 py-2 rounded-lg pointer-events-none shadow-lg">
+            <span>🔴 M-2 Critical Dew Slick (f = 0.28) | 🟡 M-11 High Glare (f = 0.32) | 🌫️ Extreme Smog Zone</span>
           </div>
         </div>
 
@@ -274,11 +313,11 @@ export default function CorridorMap() {
         <div className="p-6 bg-[#080d1a] border-t lg:border-t-0 lg:border-l border-slate-800 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] font-mono tracking-wider text-slate-400 uppercase">
+              <span className="text-xs font-mono tracking-wider text-slate-400 uppercase">
                 {selectedPoint.corridor}
               </span>
               <span
-                className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${
+                className={`text-xs font-mono font-bold px-2.5 py-1 rounded-full ${
                   selectedPoint.status === "CRITICAL"
                     ? "bg-red-950 text-red-400 border border-red-800"
                     : "bg-amber-950 text-amber-400 border border-amber-800"
@@ -289,42 +328,70 @@ export default function CorridorMap() {
             </div>
 
             <h4 className="text-lg font-bold text-white mb-2">{selectedPoint.name}</h4>
-            <p className="text-xs text-slate-400 leading-relaxed mb-6">{selectedPoint.hazard}</p>
+            <p className="text-xs text-slate-300 leading-relaxed mb-4">{selectedPoint.hazard}</p>
+
+            {/* Live Smog & Air Quality Diagnostic Card */}
+            <div className="bg-red-950/25 border border-red-800/60 p-3.5 rounded-xl mb-4 font-mono">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-red-400 font-bold uppercase tracking-wider">
+                  Live Air Quality & Smog Intensity
+                </span>
+                <span className="text-[11px] bg-red-900/60 text-red-200 px-2 py-0.5 rounded border border-red-700 font-bold">
+                  {selectedPoint.smogSeverity} SMOG
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+                  <span className="text-slate-400 text-[11px] block">AIR QUALITY (AQI)</span>
+                  <span className="text-red-400 font-bold text-base">{selectedPoint.aqi} AQI</span>
+                  <span className="text-[11px] text-red-300/80 block">Hazardous Health Alert</span>
+                </div>
+                <div className="bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+                  <span className="text-slate-400 text-[11px] block">PM2.5 AEROSOLS</span>
+                  <span className="text-amber-300 font-bold text-base">{selectedPoint.pm25} µg/m³</span>
+                  <span className="text-[11px] text-amber-200/80 block">Greasy Dew Precipitate</span>
+                </div>
+              </div>
+              <div className="mt-2.5 pt-2 border-t border-red-900/40 text-xs text-slate-300 flex items-center justify-between">
+                <span>Peak Night Smog Window:</span>
+                <span className="text-amber-300 font-bold">{selectedPoint.smogPeakHour}</span>
+              </div>
+            </div>
 
             {/* Kinetic Metric Cards */}
-            <div className="grid grid-cols-2 gap-3 mb-6 font-mono">
+            <div className="grid grid-cols-2 gap-2.5 mb-6 font-mono">
               <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl">
-                <span className="text-[10px] text-slate-400 uppercase block">Safe Speed Ceiling</span>
+                <span className="text-xs text-slate-400 uppercase block">Safe Speed Ceiling</span>
                 <span className="text-2xl font-bold text-cyan-400">{selectedPoint.safeSpeed}</span>
                 <span className="text-xs text-slate-400 ml-1">km/h</span>
               </div>
 
               <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl">
-                <span className="text-[10px] text-slate-400 uppercase block">Crash Probability</span>
+                <span className="text-xs text-slate-400 uppercase block">Crash Probability</span>
                 <span className="text-2xl font-bold text-red-400">{selectedPoint.cpi.toFixed(2)}</span>
-                <span className="text-[10px] text-red-500 block">CPI &gt; 1.0 (Critical)</span>
+                <span className="text-xs text-red-400 block">CPI &gt; 1.0 (Critical)</span>
               </div>
 
               <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl">
-                <span className="text-[10px] text-slate-400 uppercase block">Optical Sightline</span>
+                <span className="text-xs text-slate-400 uppercase block">Optical Sightline</span>
                 <span className="text-xl font-bold text-white">{selectedPoint.visibility}</span>
                 <span className="text-xs text-slate-400 ml-1">meters</span>
               </div>
 
               <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl">
-                <span className="text-[10px] text-slate-400 uppercase block">Friction Coeff (f)</span>
+                <span className="text-xs text-slate-400 uppercase block">Friction Coeff (f)</span>
                 <span className="text-xl font-bold text-amber-400">{selectedPoint.friction.toFixed(2)}</span>
-                <span className="text-[10px] text-slate-400 block">Asphalt Slick</span>
+                <span className="text-xs text-slate-400 block">Asphalt Slick</span>
               </div>
             </div>
           </div>
 
           {/* Quick Highway Selector Pills */}
           <div>
-            <span className="text-[10px] font-mono text-slate-400 uppercase block mb-2">
+            <span className="text-xs font-mono text-slate-400 uppercase block mb-2">
               Select Monitored Toll Plaza / Node:
             </span>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2">
               {CORRIDOR_POINTS.map((pt) => (
                 <button
                   key={pt.id}
@@ -332,13 +399,13 @@ export default function CorridorMap() {
                     setSelectedPoint(pt)
                     mapInstanceRef.current?.panTo(pt.coords, { animate: true, duration: 0.8 })
                   }}
-                  className={`px-2.5 py-1 text-[11px] font-mono rounded-lg transition-all ${
+                  className={`px-3 py-1.5 text-xs font-mono rounded-lg transition-all ${
                     selectedPoint.id === pt.id
                       ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
-                      : "bg-slate-900 text-slate-400 hover:text-white border border-slate-800"
+                      : "bg-slate-900 text-slate-300 hover:text-white border border-slate-800"
                   }`}
                 >
-                  {pt.name.split(" ")[1] || pt.name}
+                  {pt.shortLabel}
                 </button>
               ))}
             </div>

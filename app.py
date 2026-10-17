@@ -97,9 +97,6 @@ elif has_cloud_groq:
     st.sidebar.success("Groq Fallback Active (Secured)")
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("**Active Prize Tracks:**")
-st.sidebar.markdown("- Google DeepMind Gemma 4")
-st.sidebar.markdown("- DigitalOcean Best Open-Source AI")
 
 def html(raw_str: str):
     """Cleanly render raw HTML without markdown treating 4-space indentation as code blocks."""
