@@ -37,6 +37,7 @@
 | :--- | :--- | :--- | :--- |
 | **Driver & Public Web App** | **Vercel** (Edge Static CDN) | React 19, Leaflet Punjab Motorway Radar, Night HUD | [`https://safar-guard.vercel.app`](https://safar-guard.vercel.app) |
 | **Physics & AI Engine Core** | **Streamlit Community Cloud** | Python 3.12, AASHTO Solver, Gemma 4 Vision Pipeline | [`https://safarguard.streamlit.app`](https://safarguard.streamlit.app) |
+| **Official Hackathon Demo Video** | **Google Drive Video Walkthrough** | Complete Technical System Walkthrough & Live Demo | [**Watch Demo Video**](https://drive.google.com/file/d/10WbkxA8PQZYgdati7mDP6A3NZOF2tSXM/view?usp=sharing) |
 
 </div>
 
