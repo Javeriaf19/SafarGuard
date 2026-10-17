@@ -1,0 +1,7 @@
+highway_code,highway_name,critical_visibility_threshold_m,closure_policy,diversion_points,recommended_v_max_kmh,primary_hazard
+M-2,Lahore-Islamabad Motorway,50,Complete Interchange Closure,Babu Sabu / Thokar / Sukheki,35,Chain Reaction Pileups & Unlit Vehicles
+M-11,Lahore-Sialkot Motorway,40,Complete Interchange Closure,Sambrial / Kala Khatty,30,Fast Sedan Rear-End Impacts
+M-3,Lahore-Abdul Hakeem Motorway,50,Complete Interchange Closure,Faizpur / Jaranwala,35,Heavy Cargo Truck Rollovers
+M-4,Pindi Bhattian-Multan Motorway,45,Complete Interchange Closure,Faisalabad / Gojra,30,Zero Optical Horizon Night Fog
+N-5,National Highway (GT Road),25,Advisory Escort Convoy (Convoy Only),Kala Shah Kaku / Muridke / Kamoke,25,Unlit Sugarcane Tractor-Trolleys
+L-20,Lahore Ring Road,50,Speed Reduction Advisory (L-20 Police),Mehmood Booti / Niazi Chowk,40,Urban Commuter Intersect Collisions

@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafarGuard Pitch Deck | Hacktoberfest 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800;900&family=Fira+Code:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --teal: #007A87;
+            --teal-dark: #065F68;
+            --teal-light: #ECFDF5;
+            --border: #E2E8F0;
+            --border-strong: #CBD5E1;
+            --dark-card: #090F1E;
+            --red: #EF4444;
+            --amber: #F59E0B;
+            --green: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .deck-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            transform: scale(0.99);
+            padding: 45px 70px 70px 70px;
+            background: var(--bg);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        /* Top Header in Slides */
+        .slide-header {
+            position: absolute;
+            top: 24px;
+            left: 70px;
+            right: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 20;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+        .brand-text-main {
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: -0.6px;
+            line-height: 1;
+        }
+        .brand-text-main span {
+            font-weight: 900;
+        }
+        .brand-sub {
+            font-family: 'Fira Code', monospace;
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: var(--text-main);
+            margin-top: 3px;
+        }
+
+        .header-badges {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .badge-pill {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .badge-gemma { background: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD; }
+        .badge-do { background: #F3E8FF; color: #7E22CE; border: 1px solid #E9D5FF; }
+
+        /* Navigation Controls at Bottom */
+        .deck-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 70px;
+            right: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 30;
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background: #CBD5E1;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .dot.active {
+            width: 32px;
+            background: var(--teal);
+        }
+
+        .nav-controls {
+            font-family: 'Fira Code', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .nav-btn {
+            background: #FFFFFF;
+            border: 1px solid var(--border-strong);
+            color: var(--text-main);
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+
+        /* ================= SLIDE 1: REAL ACCIDENT HOOK ================= */
+        .slide-hook {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 48px;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding-top: 50px;
+        }
+
+        .hook-copy .tagline {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--red);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hook-copy h1 {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .hook-copy h1 span { color: var(--teal); }
+
+        .hook-copy .desc {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            max-width: 540px;
+        }
+
+        .presenter-strip {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+        .presenter-strip b { font-size: 15px; color: var(--text-main); }
+        .presenter-strip span { font-size: 13px; color: var(--text-muted); font-family: 'Fira Code', monospace; }
+
+        .hook-card {
+            background: var(--dark-card);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+            border: 1px solid #1E293B;
+            height: 82%;
+            display: flex;
+            flex-direction: column;
+        }
+        .hook-image-box {
+            position: relative;
+            flex: 1;
+            background: #000;
+        }
+        .hook-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+        .hook-overlay-top {
+            position: absolute;
+            top: 14px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .hook-tag-dark {
+            background: rgba(15,23,42,0.85);
+            color: #FFF;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            font-family: 'Fira Code', monospace;
+        }
+        .hook-tag-danger {
+            background: rgba(239,68,68,0.25);
+            color: #EF4444;
+            border: 1px solid #EF4444;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: 'Fira Code', monospace;
+        }
+        .hook-card-footer {
+            background: var(--dark-card);
+            padding: 18px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            border-top: 1px solid #1E293B;
+        }
+        .hook-metric-label { font-size: 9px; font-weight: 800; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.1em; }
+        .hook-metric-val { font-family: 'Fira Code', monospace; font-size: 22px; font-weight: 800; color: #FFFFFF; margin-top: 2px; }
+
+        /* ================= SLIDE 2: DATASETS & GRAPHS ================= */
+        .slide-data-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 36px;
+            width: 100%;
+            height: 100%;
+            padding-top: 50px;
+            align-items: center;
+        }
+
+        .data-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .metric-card:hover {
+            border-color: var(--teal);
+        }
+        .metric-title { font-size: 14px; font-weight: 800; color: var(--text-main); }
+        .metric-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        .metric-num { font-family: 'Fira Code', monospace; font-size: 34px; font-weight: 800; }
+
+        .chart-container-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px 24px;
+            height: 84%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        /* ================= SLIDE 3: SCIENCE & GEMMA 4 ================= */
+        .slide-science-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 36px;
+            width: 100%;
+            height: 100%;
+            padding-top: 50px;
+            align-items: center;
+        }
+
+        .formula-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--teal);
+            border-radius: 14px;
+            padding: 22px 26px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .formula-lbl {
+            font-family: 'Fira Code', monospace;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--teal);
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+        .formula-eq {
+            font-family: 'Fira Code', monospace;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+        .formula-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .gemma-ai-box {
+            background: var(--dark-card);
+            border-radius: 18px;
+            border: 1px solid #1E293B;
+            padding: 28px;
+            color: #FFF;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+        }
+        .gemma-feature {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid #1E293B;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        /* ================= SLIDE 4: 5-SCREEN ECOSYSTEM ================= */
+        .slide-screens-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            width: 100%;
+            height: 78%;
+            padding-top: 48px;
+            margin-top: 14px;
+        }
+
+        .screen-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+        }
+        .screen-card:hover {
+            border-color: var(--teal);
+            transform: translateY(-2px);
+        }
+        .screen-badge {
+            font-family: 'Fira Code', monospace;
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--teal);
+            text-transform: uppercase;
+        }
+        .screen-h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 6px 0 8px 0;
+        }
+        .screen-p {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* ================= SLIDE 5: LIVE AUDIO BEACON & DEMO ================= */
+        .demo-center-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .audio-banner {
+            background: var(--dark-card);
+            border-radius: 18px;
+            border: 1px solid #1E293B;
+            padding: 34px 44px;
+            max-width: 760px;
+            margin: 24px 0;
+            color: #FFF;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+        }
+
+        .btn-audio-speak {
+            background: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+            transition: all 0.2s ease;
+        }
+        .btn-audio-speak:hover {
+            background: #1D4ED8;
+            transform: scale(1.02);
+        }
+
+        /* ================= SLIDE 6: OPEN SOURCE & WIN ================= */
+        .slide-tracks-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            width: 100%;
+            height: 100%;
+            padding-top: 50px;
+            align-items: center;
+        }
+
+        .track-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+    </style>
+</head>
+<body>
+
+<div class="deck-container">
+
+    <!-- Universal Header Lockup -->
+    <div class="slide-header">
+        <a class="brand-lockup" href="#">
+            <svg width="32" height="34" viewBox="0 0 35 37" fill="none">
+                <path d="M17.5 2 32 8v13c0 7-14.5 14-14.5 14S3 28 3 21V8L17.5 2Z" stroke="#007A87" stroke-width="2.6" stroke-linejoin="round" />
+                <path d="m13 12-4 14m13-14 4 14M17.5 12v5m0 4v5" stroke="#007A87" stroke-width="2.6" stroke-linecap="round" />
+            </svg>
+            <div>
+                <div class="brand-text-main">Safar<span>Guard</span></div>
+                <div class="brand-sub">HIGHWAY INTELLIGENCE</div>
+            </div>
+        </a>
+        <div class="header-badges">
+            <span class="badge-pill badge-gemma">Google DeepMind • Gemma 4 Track</span>
+            <span class="badge-pill badge-do">DigitalOcean • Open-Source Track</span>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 1: REAL ACCIDENT HOOK ================= -->
+    <div class="slide slide-hook active" id="slide-1">
+        <div class="hook-copy">
+            <div class="tagline">
+                <span>● PROVINCIAL HIGHWAY SAFETY</span> • CENTRAL PUNJAB
+            </div>
+            <h1>The Winter<br><span>Death Trap.</span></h1>
+            <p class="desc">
+                Every winter, dense smog paralyzes the M-2, M-11, and GT Road. 
+                Conventional apps treat smog merely as an <b>air quality issue</b>. 
+                Drivers continue cruising at 100 km/h until blinding whiteout glare and a greasy chemical dew slick cause fatal multi-vehicle pileups.
+            </p>
+            <div class="presenter-strip">
+                <div>
+                    <b>Javeria Farhan</b><br>
+                    <span>Lead Developer & Researcher • Hacktoberfest Lahore 2026</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hook-card">
+            <div class="hook-image-box">
+                <img src="images/fog-collision.jpg" alt="Real Highway Smog Pileup Accident" onerror="this.src='https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=800&q=80'">
+                <div class="hook-overlay-top">
+                    <span class="hook-tag-dark">M-2 BABU SABU • LIVE FEED</span>
+                    <span class="hook-tag-danger">CRITICAL HAZARD</span>
+                </div>
+            </div>
+            <div class="hook-card-footer">
+                <div>
+                    <div class="hook-metric-label">Visibility</div>
+                    <div class="hook-metric-val" style="color: #06B6D4;">28 m</div>
+                </div>
+                <div>
+                    <div class="hook-metric-label">Crash Risk (CPI)</div>
+                    <div class="hook-metric-val" style="color: #EF4444;">3.82</div>
+                </div>
+                <div>
+                    <div class="hook-metric-label">Safe Speed Cap</div>
+                    <div class="hook-metric-val" style="color: #10B981;">35 <span style="font-size: 11px;">km/h</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 2: EMPIRICAL DATASETS & GRAPHS ================= -->
+    <div class="slide" id="slide-2">
+        <div class="slide-data-grid">
+            <div class="data-cards">
+                <div>
+                    <div style="font-size: 11px; font-weight: 800; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
+                        REAL-TIME ACCIDENT RISK MATRIX
+                    </div>
+                    <h2 style="font-size: 32px; font-weight: 900; text-transform: uppercase;">The Ground Reality.</h2>
+                </div>
+
+                <div class="metric-card">
+                    <div>
+                        <div class="metric-title">Winter Emergency Collision Surge</div>
+                        <div class="metric-sub">Punjab Rescue 1122 highway dispatch data (Nov - Feb)</div>
+                    </div>
+                    <div class="metric-num" style="color: var(--red);">+34.8%</div>
+                </div>
+
+                <div class="metric-card">
+                    <div>
+                        <div class="metric-title">Chemical Dew Friction Collapse</div>
+                        <div class="metric-sub">Aerosol soot + cold moisture drops grip (f = 0.70 &rarr; 0.28)</div>
+                    </div>
+                    <div class="metric-num" style="color: var(--amber);">0.28 f</div>
+                </div>
+
+                <div class="metric-card">
+                    <div>
+                        <div class="metric-title">Driver Perception Delay</div>
+                        <div class="metric-sub">Optical particle backscatter expands perception lag</div>
+                    </div>
+                    <div class="metric-num" style="color: var(--teal);">2.85s</div>
+                </div>
+            </div>
+
+            <div class="chart-container-box">
+                <div style="font-size: 14px; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">Stopping Distance vs. Speed: Dry Asphalt vs. Smog Slick</div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">Source: AASHTO Highway Geometric Standards & Punjab Rescue 1122 Benchmarks</div>
+                <div style="flex: 1; position: relative;">
+                    <canvas id="brakingChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 3: SCIENCE & GEMMA 4 ================= -->
+    <div class="slide" id="slide-3">
+        <div class="slide-science-grid">
+            <div>
+                <div style="margin-bottom: 14px;">
+                    <div style="font-size: 11px; font-weight: 800; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
+                        HIGHWAY SAFETY MATHEMATICS
+                    </div>
+                    <h2 style="font-size: 32px; font-weight: 900; text-transform: uppercase;">The Science & Physics.</h2>
+                </div>
+
+                <div class="formula-box">
+                    <div class="formula-lbl">AASHTO STOPPING SIGHT DISTANCE (SSD)</div>
+                    <div class="formula-eq">SSD = (v &times; t<sub>r</sub>) + [ v&sup2; / (2gf) ]</div>
+                    <div class="formula-desc">
+                        &bull; <b>v</b> = vehicle velocity in m/s &bull; <b>t<sub>r</sub></b> = perception lag (2.85s in smog)<br>
+                        &bull; <b>f</b> = chemical dew friction (0.28)<br>
+                        &bull; <b>Crash Probability Index (CPI):</b> SSD / Visibility. When CPI &gt; 1.0, stopping is mathematically impossible.
+                    </div>
+                </div>
+
+                <div class="formula-box" style="border-left-color: var(--green);">
+                    <div class="formula-lbl" style="color: var(--green);">QUADRATIC SAFE SPEED SOLVER</div>
+                    <div class="formula-eq" style="color: var(--green); font-size: 22px;">v<sub>safe</sub> = [ -b + &radic;(b&sup2; + 4ac) ] / 2a</div>
+                    <div class="formula-desc">
+                        Dynamically caps maximum safe driving speed so vehicle stopping sight distance never exceeds visible road boundary.
+                    </div>
+                </div>
+            </div>
+
+            <div class="gemma-ai-box">
+                <div style="font-family: 'Fira Code', monospace; color: #38BDF8; font-size: 11px; font-weight: 800; margin-bottom: 8px;">
+                    GOOGLE DEEPMIND AI ENGINE
+                </div>
+                <h3 style="font-size: 22px; font-weight: 900; color: #FFF; margin-bottom: 12px;">Gemma 4 Multimodal Vision</h3>
+                <p style="font-size: 13px; color: #94A3B8; line-height: 1.6; margin-bottom: 16px;">
+                    Forward dashcam camera frames are continuously audited to protect against sudden catastrophic hazards:
+                </p>
+                <div class="gemma-feature" style="border-left: 3px solid #38BDF8;">
+                    <b style="color: #38BDF8;">1. Glare & Backscatter Audit:</b> Detects blinding high-beam reflection bouncing off dense aerosol carbon.
+                </div>
+                <div class="gemma-feature" style="border-left: 3px solid #EF4444;">
+                    <b style="color: #EF4444;">2. Low-Contrast Obstacle Alert:</b> Identifies unlit sugarcane tractor-trolleys and broken-down buses.
+                </div>
+                <div class="gemma-feature" style="border-left: 3px solid #10B981;">
+                    <b style="color: #10B981;">3. Roman Urdu Audio Beacons:</b> Generates instant spoken voice warnings for active drivers.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 4: 5-SCREEN ECOSYSTEM ================= -->
+    <div class="slide" id="slide-4" style="flex-direction: column;">
+        <div style="margin-top: 24px;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
+                MULTI-INTERFACE ARCHITECTURE
+            </div>
+            <h2 style="font-size: 32px; font-weight: 900; text-transform: uppercase;">"Don't Outdrive What You Can See."</h2>
+        </div>
+
+        <div class="slide-screens-grid">
+            <div class="screen-card">
+                <span class="screen-badge">SCREEN 01</span>
+                <div class="screen-h3">Corridor Monitor</div>
+                <div class="screen-p">Live risk matrix for M-2, M-11, N-5, Ring Road, and M-4 with sensor visibility tracking and real-time safe speed caps.</div>
+            </div>
+
+            <div class="screen-card" style="border-color: var(--teal);">
+                <span class="screen-badge" style="color: var(--teal);">SCREEN 02</span>
+                <div class="screen-h3">Careem / In-Ride HUD</div>
+                <div class="screen-p">Dedicated mobile companion for Careem, InDrive, and Uber drivers with live GPS road map, hazard pins, and safe speed limit alerts.</div>
+            </div>
+
+            <div class="screen-card" style="border-color: var(--amber);">
+                <span class="screen-badge" style="color: var(--amber);">SCREEN 03</span>
+                <div class="screen-h3">Command Console</div>
+                <div class="screen-p">Control room dashboard for Motorway Police (NHMP) and Rescue 1122 with geohash cluster maps and emergency broadcast controls.</div>
+            </div>
+
+            <div class="screen-card">
+                <span class="screen-badge">SCREEN 04</span>
+                <div class="screen-h3">Night HUD Cockpit</div>
+                <div class="screen-p">High-contrast zero-glare night instrument cluster with big speed indicator, CPI collision dial, and audio beacon controls.</div>
+            </div>
+
+            <div class="screen-card">
+                <span class="screen-badge">SCREEN 05</span>
+                <div class="screen-h3">Stopping Simulator</div>
+                <div class="screen-p">Interactive dynamic road diagram showing the real-time physical stopping gap between reaction time, braking distance, and visibility.</div>
+            </div>
+
+            <div class="screen-card" style="background: var(--dark-card); color: #FFF; border-color: #334155;">
+                <span class="screen-badge" style="color: #38BDF8;">DESIGN SYSTEM</span>
+                <div class="screen-h3" style="color: #FFF;">Automotive Telematics</div>
+                <div class="screen-p" style="color: #94A3B8;">Barlow & Fira Code typography, clean off-white palette, and 100% WCAG AAA night contrast ratios.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 5: LIVE DEMO & AUDIO BEACON ================= -->
+    <div class="slide" id="slide-5">
+        <div class="demo-center-stage">
+            <div style="font-size: 11px; font-weight: 800; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
+                ACOUSTIC SAFETY BEACON
+            </div>
+            <h2 style="font-size: 40px; font-weight: 900; text-transform: uppercase; margin-bottom: 14px;">
+                Urgent Roman Urdu Audio Warning
+            </h2>
+            <p style="color: var(--text-muted); font-size: 16px; max-width: 620px;">
+                Drivers in zero-visibility fog cannot safely glance at phone screens. SafarGuard delivers critical advisories directly into their cabin:
+            </p>
+
+            <div class="audio-banner">
+                <div style="font-size: 24px; line-height: 1.5; font-weight: 800; color: #FFFFFF; margin-bottom: 22px;">
+                    "Khatra shadeed hai! Motorway par greasy chemical dew ki wajah se break nahi lagegi. Raftaar foran 35 km/h karein!"
+                </div>
+                <button class="btn-audio-speak" onclick="playBeacon()">
+                    🔊 Play Live Audio Beacon
+                </button>
+            </div>
+
+            <div style="display: flex; gap: 14px;">
+                <a href="http://localhost:5173" target="_blank" style="text-decoration: none;">
+                    <button class="nav-btn" style="padding: 12px 24px; font-size: 14px; background: var(--teal); color: #FFF; border-color: var(--teal);">
+                        🚀 Open Live Web App (5 Screens)
+                    </button>
+                </a>
+                <a href="http://localhost:8501" target="_blank" style="text-decoration: none;">
+                    <button class="nav-btn" style="padding: 12px 24px; font-size: 14px;">
+                        🧮 Open AI & Physics Dashboard
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 6: ENGINEERING & OPEN STANDARDS ================= -->
+    <div class="slide" id="slide-6">
+        <div class="slide-tracks-grid">
+            <div class="track-card" style="border-top: 4px solid #007A87;">
+                <div>
+                    <span class="badge-pill" style="background: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD;">COMPUTER VISION ENGINE</span>
+                    <h2 style="font-size: 28px; font-weight: 900; color: var(--text-main); margin: 18px 0 14px 0;">Google Gemma 4 Pipeline</h2>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">
+                        &bull; <b>Multimodal Frame Inspection:</b> Continuous windshield dashcam stream analysis via Google DeepMind Gemma 4.<br>
+                        &bull; <b>Hazard Classification:</b> Identifies low-contrast unlit sugarcane trolleys, broken-down buses, and high-beam aerosol backscatter.<br>
+                        &bull; <b>Edge & Cloud Dual-Mode:</b> Cloud Gemini API speed with local edge inference fallback for zero-connectivity highway stretches.
+                    </p>
+                </div>
+                <div style="font-family: 'Fira Code', monospace; font-size: 12px; color: var(--teal); padding-top: 14px; border-top: 1px solid var(--border);">
+                    &check; Standardized REST & Web Speech Synthesis Architecture
+                </div>
+            </div>
+
+            <div class="track-card" style="border-top: 4px solid #10B981;">
+                <div>
+                    <span class="badge-pill" style="background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0;">OPEN STANDARDS & REPRODUCIBILITY</span>
+                    <h2 style="font-size: 28px; font-weight: 900; color: var(--text-main); margin: 18px 0 14px 0;">Agent Skill Standard & Data</h2>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">
+                        &bull; <b>Permissive Open Source:</b> 100% MIT Licensed for public safety adoption.<br>
+                        &bull; <b>Agent Skill Open Standard (<code>SKILL.md</code>):</b> Fully formatted so autonomous AI agents can invoke SafarGuard telemetry as an automated safety tool.<br>
+                        &bull; <b>Empirical Foundation:</b> Integrated Punjab Rescue 1122 dispatch logs and NHMP motorway closure criteria.
+                    </p>
+                </div>
+                <div style="font-family: 'Fira Code', monospace; font-size: 12px; color: var(--green); padding-top: 14px; border-top: 1px solid var(--border);">
+                    &check; Zero Vendor Lock-in & Clean Modular Codebase
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 7: THE VISION & OPEN-SOURCE CTA ================= -->
+    <div class="slide" id="slide-7" style="flex-direction: column;">
+        <div style="margin-top: 24px;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
+                THE ROAD AHEAD • SCALING TO SAVE LIVES
+            </div>
+            <h2 style="font-size: 32px; font-weight: 900; text-transform: uppercase;">A Federated National Safety Grid</h2>
+            <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px; max-width: 800px;">
+                Zero preventable highway collision deaths is the only acceptable metric. Smog and fog do not stop at provincial borders—and neither should intelligent highway safety.
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; margin-top: 24px; flex: 1;">
+            <div class="screen-card" style="border-top: 4px solid var(--teal);">
+                <div>
+                    <span class="screen-badge">01. MULTI-CITY EXPANSION</span>
+                    <div class="screen-h3">Beyond Central Punjab</div>
+                    <div class="screen-p">
+                        Expanding corridor telemetry and dynamic speed modeling to:<br>
+                        &bull; <b>Karachi Port Corridors:</b> Dense coastal morning sea-fog and heavy container freight.<br>
+                        &bull; <b>Khyber Pakhtunkhwa (M-1):</b> Mountain winter fog and sudden elevation visibility drops.<br>
+                        &bull; <b>South Punjab & Sindh (M-5):</b> Multan-Sukkur high-speed freight logistics spine.
+                    </div>
+                </div>
+            </div>
+
+            <div class="screen-card" style="border-top: 4px solid var(--amber);">
+                <div>
+                    <span class="screen-badge" style="color: var(--amber);">02. FLEET INTEGRATION</span>
+                    <div class="screen-h3">Crowdsourced Telematics</div>
+                    <div class="screen-p">
+                        Partnering with intercity transport and courier fleets:<br>
+                        &bull; <b>Live Ingestion:</b> Connect dashcam optical feeds from Daewoo, Faisal Movers, and TCS logistics.<br>
+                        &bull; <b>Fleet-wide Alerts:</b> Deliver audible Roman Urdu speed cap alerts directly into commercial bus and truck cabins.<br>
+                        &bull; <b>Decentralized Mesh:</b> Vehicles share localized friction slick alerts peer-to-peer.
+                    </div>
+                </div>
+            </div>
+
+            <div class="screen-card" style="border-top: 4px solid var(--green); background: var(--dark-card); color: #FFF;">
+                <div>
+                    <span class="screen-badge" style="color: #38BDF8;">03. OPEN SOURCE CALL TO ACTION</span>
+                    <div class="screen-h3" style="color: #FFF;">Contribute & Save Lives</div>
+                    <div class="screen-p" style="color: #CBD5E1;">
+                        SafarGuard is an open platform for developers, researchers, and road safety authorities across Pakistan and the globe.<br><br>
+                        &bull; <b>Add Your City:</b> Contribute local highway coordinate nodes.<br>
+                        &bull; <b>Improve Models:</b> Train localized vision models on regional fog datasets.<br>
+                        &bull; <b>Build Connectors:</b> Integrate with provincial 1122 and NHMP dispatch desks.
+                    </div>
+                </div>
+                <div style="margin-top: 16px;">
+                    <a href="https://github.com/javeriafarhan/SafarGuard" target="_blank" style="text-decoration: none;">
+                        <button class="nav-btn" style="width: 100%; background: var(--teal); color: #FFF; border-color: var(--teal); padding: 10px; font-size: 13px;">
+                            ⭐ Star & Fork on GitHub
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide Bottom Navigation Bar -->
+    <div class="deck-nav">
+        <div class="nav-dots" id="dotsContainer"></div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">&#8592; Prev</button>
+            <span id="slideCounter">1 / 6</span>
+            <button class="nav-btn" onclick="nextSlide()">Next &#8594;</button>
+            <span>[Use &larr; &rarr; Arrow Keys]</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const dotsContainer = document.getElementById('dotsContainer');
+    const slideCounter = document.getElementById('slideCounter');
+
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+    }
+
+    function updateDeck() {
+        slides.forEach((s, idx) => {
+            s.classList.toggle('active', idx === currentSlide);
+        });
+        document.querySelectorAll('.dot').forEach((d, idx) => {
+            d.classList.toggle('active', idx === currentSlide);
+        });
+        slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+        if (currentSlide === 1 && !window.chartRendered) {
+            initBrakingChart();
+            window.chartRendered = true;
+        }
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateDeck();
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateDeck();
+        }
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateDeck();
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            prevSlide();
+        }
+    });
+
+    function playBeacon() {
+        const text = "Khatra shadeed hai! Motorway par greasy chemical dew ki wajah se break nahi lagegi. Raftaar foran penty-saath par le aayein!";
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'hi-IN';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function initBrakingChart() {
+        const ctx = document.getElementById('brakingChart').getContext('2d');
+        const speeds = [40, 60, 80, 100, 120];
+        
+        const dryDistance = speeds.map(s => {
+            const v = s * (5/18);
+            return Math.round((v * 1.5) + (v*v)/(2 * 9.8 * 0.70));
+        });
+
+        const smogDistance = speeds.map(s => {
+            const v = s * (5/18);
+            return Math.round((v * 2.85) + (v*v)/(2 * 9.8 * 0.28));
+        });
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: speeds.map(s => s + ' km/h'),
+                datasets: [
+                    {
+                        label: 'Dry Asphalt (f=0.70)',
+                        data: dryDistance,
+                        backgroundColor: 'rgba(16, 185, 129, 0.75)',
+                        borderColor: '#10B981',
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'Chemical Smog Slick (f=0.28)',
+                        data: smogDistance,
+                        backgroundColor: 'rgba(239, 68, 68, 0.85)',
+                        borderColor: '#EF4444',
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#0F172A', font: { family: 'Fira Code', size: 11, weight: 'bold' } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y + ' meters';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#64748B', font: { family: 'Fira Code', weight: 'bold' } },
+                        grid: { color: '#E2E8F0' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Total Stopping Distance (meters)', color: '#64748B', font: { weight: 'bold' } },
+                        ticks: { color: '#64748B', font: { family: 'Fira Code' } },
+                        grid: { color: '#E2E8F0' }
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

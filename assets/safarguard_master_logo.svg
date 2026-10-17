@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 120" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800;900&amp;family=Fira+Code:wght@600&amp;display=swap');
+      .shield-stroke { stroke: #007A87; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .brand-title { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 52px; fill: #0F172A; }
+      .brand-regular { font-weight: 500; letter-spacing: -1.5px; }
+      .brand-bold { font-weight: 900; letter-spacing: -1.5px; }
+      .sub-title { font-family: 'Fira Code', 'Inter', monospace; font-size: 15px; font-weight: 700; fill: #0F172A; letter-spacing: 9px; }
+    </style>
+  </defs>
+
+  <!-- Clean Off-White Background -->
+  <rect width="100%" height="100%" fill="transparent" />
+
+  <!-- Shield Emblem Icon (Figma Canonical Geometry) -->
+  <g transform="translate(20, 16) scale(2.3)">
+    <!-- Outer Aerodynamic Hex Shield -->
+    <path class="shield-stroke" d="M17.5 2 L32 8 V21 C32 28 17.5 35 17.5 35 S3 28 3 21 V8 L17.5 2 Z" fill="none" />
+    
+    <!-- Highway Road Perspective & Dashed Center Lane -->
+    <path class="shield-stroke" d="M13 12 L9 26 M22 12 L26 26 M17.5 12 V17 M17.5 21 V26" fill="none" />
+  </g>
+
+  <!-- Master Brand Typography -->
+  <!-- "SafarGuard" -->
+  <text x="130" y="66" class="brand-title">
+    <tspan class="brand-regular">Safar</tspan><tspan class="brand-bold">Guard</tspan>
+  </text>
+
+  <!-- "HIGHWAY INTELLIGENCE" -->
+  <text x="132" y="98" class="sub-title">HIGHWAY INTELLIGENCE</text>
+</svg>

@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafarGuard | Master Figma UI/UX Design System & Screen Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* OLED Automotive Night Palette (UI UX Pro Max Verified) */
+      --bg-canvas: #020617;
+      --bg-surface: #090F1E;
+      --bg-card: #0F172A;
+      --bg-card-hover: #162038;
+      --border-subtle: #1E293B;
+      --border-active: #334155;
+      
+      /* Safety Accent Tokens */
+      --cyan-hud: #06B6D4;
+      --cyan-glow: rgba(6, 182, 212, 0.25);
+      --amber-fog: #F59E0B;
+      --amber-glow: rgba(245, 158, 11, 0.25);
+      --danger-red: #EF4444;
+      --danger-glow: rgba(239, 68, 68, 0.35);
+      --safe-green: #10B981;
+      --safe-glow: rgba(16, 185, 129, 0.2);
+
+      /* Typography */
+      --text-pure: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-pure);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Top Global Header */
+    .figma-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 15, 30, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .brand-title span { color: var(--cyan-hud); }
+
+    .screen-nav {
+      display: flex;
+      gap: 8px;
+      background: #0B1222;
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .nav-tab {
+      background: transparent;
+      color: var(--text-secondary);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .nav-tab:hover { color: var(--text-pure); }
+    .nav-tab.active {
+      background: var(--cyan-hud);
+      color: #020617;
+      font-weight: 700;
+      box-shadow: 0 2px 10px var(--cyan-glow);
+    }
+
+    /* Main Prototype Container */
+    .canvas-viewport {
+      padding: 40px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: calc(100vh - 70px);
+    }
+
+    .screen-frame {
+      display: none;
+      width: 100%;
+      animation: fadeIn 0.3s ease forwards;
+    }
+    .screen-frame.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================================
+       SCREEN 1: PUBLIC WEB & INCIDENT CORRIDOR MAP (1280px)
+       ======================================================== */
+    .desktop-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-banner {
+      padding: 60px 48px;
+      background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.15), transparent 50%),
+                  linear-gradient(180deg, #090F1E 0%, #060B17 100%);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-text h1 {
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero-text h1 span {
+      background: linear-gradient(135deg, #38BDF8, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-text p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 580px;
+      line-height: 1.6;
+    }
+
+    .hero-stats-badge {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border-active);
+      border-radius: 16px;
+      padding: 24px;
+      width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .stat-pill {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+    .stat-pill span:first-child { color: var(--text-muted); }
+    .stat-pill span:last-child { font-family: 'Fira Code', monospace; font-weight: 700; }
+
+    /* Corridor Risk Grid */
+    .corridor-grid {
+      padding: 40px 48px;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .c-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px;
+      transition: all 0.2s ease;
+    }
+    .c-card:hover {
+      border-color: var(--cyan-hud);
+      transform: translateY(-2px);
+    }
+    .c-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .c-title { font-size: 15px; font-weight: 700; }
+    .badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .badge-red { background: rgba(239, 68, 68, 0.15); color: var(--danger-red); border: 1px solid var(--danger-red); }
+    .badge-amber { background: rgba(245, 158, 11, 0.15); color: var(--amber-fog); border: 1px solid var(--amber-fog); }
+    .badge-green { background: rgba(16, 185, 129, 0.15); color: var(--safe-green); border: 1px solid var(--safe-green); }
+
+    .c-metric {
+      font-family: 'Fira Code', monospace;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .c-meta { font-size: 12px; color: var(--text-muted); }
+
+    /* ========================================================
+       SCREEN 2 & 3: MOBILE PHONE MOCKUP (390 x 844 iPhone View)
+       ======================================================== */
+    .phone-mockup-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .iphone-frame {
+      width: 390px;
+      height: 844px;
+      background: #000000;
+      border-radius: 54px;
+      border: 12px solid #1E293B;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* iPhone Dynamic Island & Status Bar */
+    .dynamic-island {
+      width: 124px;
+      height: 32px;
+      background: #000000;
+      border-radius: 20px;
+      margin: 12px auto 6px auto;
+      z-index: 100;
+    }
+    .phone-status-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 24px 8px 24px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .phone-content {
+      flex: 1;
+      padding: 16px 20px;
+      overflow-y: auto;
+      background: var(--bg-canvas);
+    }
+
+    /* Driver HUD Mobile Styles */
+    .hud-speed-gauge {
+      background: radial-gradient(circle at center, #111D36 0%, #0A1122 100%);
+      border: 2px solid var(--danger-red);
+      border-radius: 24px;
+      padding: 24px 16px;
+      text-align: center;
+      margin-bottom: 16px;
+      box-shadow: 0 0 35px rgba(239, 68, 68, 0.3);
+      position: relative;
+    }
+    .hud-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-secondary);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .hud-big-speed {
+      font-family: 'Fira Code', monospace;
+      font-size: 64px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1;
+      margin: 8px 0;
+    }
+    .hud-speed-unit { font-size: 14px; color: var(--danger-red); font-weight: 700; }
+
+    .hud-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .hud-sub-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+    }
+    .hud-sub-val {
+      font-family: 'Fira Code', monospace;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--cyan-hud);
+      margin-top: 4px;
+    }
+
+    .spoken-alert-box {
+      background: rgba(239, 68, 68, 0.14);
+      border-left: 4px solid var(--danger-red);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .spoken-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #F87171;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .spoken-body {
+      font-size: 13px;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1.45;
+    }
+
+    .audio-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+      color: #FFFFFF;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    }
+
+    /* ========================================================
+       SCREEN 3: CAREEM / INDRIVE DRIVER OVERLAY (Native App)
+       ======================================================== */
+    .careem-map-bg {
+      flex: 1;
+      background: #0B132B url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M 0 50 L 100 50 M 50 0 L 50 100" stroke="%231E293B" stroke-width="1.5"/></svg>');
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px;
+    }
+
+    /* Careem Native Header */
+    .careem-header {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(12px);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--border-subtle);
+    }
+    .careem-brand { font-size: 16px; font-weight: 900; color: #00EB78; }
+    .careem-fare { font-family: 'Fira Code', monospace; font-size: 14px; font-weight: 700; }
+
+    /* The Floating SafeGuard Floating Pill Widget */
+    .safeguard-overlay-card {
+      background: rgba(9, 15, 30, 0.94);
+      backdrop-filter: blur(20px);
+      border: 2px solid var(--danger-red);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);
+      animation: pulse-danger 2s infinite;
+    }
+    @keyframes pulse-danger {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+      70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    .overlay-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .overlay-title { font-size: 13px; font-weight: 800; color: var(--danger-red); display: flex; align-items: center; gap: 6px; }
+    .speed-cap-pill {
+      background: var(--danger-red);
+      color: #FFFFFF;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .overlay-body { font-size: 12px; color: var(--text-pure); line-height: 1.4; margin-bottom: 10px; }
+    .hazard-radar-pin {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--amber-fog);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--amber-fog);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Careem Bottom Navigation Bar */
+    .careem-nav-bar {
+      background: #0F172A;
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid var(--border-subtle);
+    }
+    .nav-route-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .nav-dest { font-size: 14px; font-weight: 700; }
+    .nav-eta { font-family: 'Fira Code', monospace; color: var(--cyan-hud); font-weight: 700; font-size: 14px; }
+    .nav-btn-green {
+      width: 100%;
+      background: #00EB78;
+      color: #020617;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* ========================================================
+       SCREEN 4: RESCUE 1122 & FLEET COMMAND CONSOLE (1280px)
+       ======================================================== */
+    .fleet-console {
+      display: grid;
+      grid-template-columns: 280px 1fr 340px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 700px;
+    }
+
+    .fleet-sidebar {
+      background: #060B18;
+      border-right: 1px solid var(--border-subtle);
+      padding: 24px;
+    }
+    .fleet-main {
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .fleet-feed {
+      background: #080D1D;
+      border-left: 1px solid var(--border-subtle);
+      padding: 24px;
+    }
+
+    .feed-card {
+      background: var(--bg-card);
+      border-left: 4px solid var(--danger-red);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+    .feed-time { font-family: 'Fira Code', monospace; color: var(--text-muted); font-size: 10px; margin-bottom: 4px; }
+    .feed-text { font-weight: 600; line-height: 1.4; }
+
+    /* Figma Export Floating Banner */
+    .figma-spec-footer {
+      max-width: 1240px;
+      margin: 40px auto 0 auto;
+      background: #0B1325;
+      border: 1px solid var(--cyan-hud);
+      border-radius: 16px;
+      padding: 20px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .spec-text h4 { font-size: 16px; font-weight: 800; color: #FFFFFF; }
+    .spec-text p { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+    .export-btn {
+      background: var(--cyan-hud);
+      color: #020617;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="figma-toolbar">
+    <div class="brand-cluster">
+      <!-- Master SVG Logo -->
+      <svg width="34" height="34" viewBox="0 0 800 800">
+        <path d="M 400,130 L 580,210 C 580,395 500,505 400,565 C 300,505 220,395 220,210 Z" fill="#0A1428" stroke="#06B6D4" stroke-width="36" />
+        <polygon points="400,270 140,350 140,405 400,305" fill="#FFB800" />
+        <polygon points="400,270 660,350 660,405 400,305" fill="#FFB800" />
+        <circle cx="400" cy="275" r="30" fill="#FFFFFF" />
+      </svg>
+      <div class="brand-title">SAFAR<span>GUARD</span> <small style="font-size: 11px; color: var(--text-muted); font-weight: 600;">FIGMA SYSTEM V1.0</small></div>
+    </div>
+
+    <!-- Screen Switcher Tabs -->
+    <nav class="screen-nav">
+      <button class="nav-tab active" onclick="switchScreen('screen-web')">1. Public Web & Map</button>
+      <button class="nav-tab" onclick="switchScreen('screen-hud')">2. Driver Night HUD (Mobile)</button>
+      <button class="nav-tab" onclick="switchScreen('screen-careem')">3. Careem/InDrive Overlay</button>
+      <button class="nav-tab" onclick="switchScreen('screen-fleet')">4. Rescue 1122 Fleet Command</button>
+    </nav>
+
+    <div style="font-size: 12px; font-family: 'Fira Code', monospace; color: var(--safe-green);">
+      ● UI UX PRO MAX CERTIFIED
+    </div>
+  </header>
+
+  <main class="canvas-viewport">
+
+    <!-- ========================================================
+         SCREEN 1: PUBLIC WEB & INCIDENT CORRIDOR MAP
+         ======================================================== -->
+    <section id="screen-web" class="screen-frame active">
+      <div class="desktop-container">
+        <!-- Hero Header -->
+        <div class="hero-banner">
+          <div class="hero-text">
+            <div style="font-size: 12px; font-weight: 800; color: var(--cyan-hud); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">
+              PROVINCIAL ROAD SAFETY INTELLIGENCE • PUNJAB
+            </div>
+            <h1>Predicting Highway Pileups<br><span>Before You Reach The Fog Bank</span></h1>
+            <p>AASHTO Stopping Sight Distance (SSD) physics combined with Google DeepMind Gemma 4 Multimodal Vision to eliminate zero-visibility smog crashes across M-2, M-11, and GT Road.</p>
+          </div>
+          
+          <div class="hero-stats-badge">
+            <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px;">Active Highway Status</div>
+            <div class="stat-pill">
+              <span>M-2 Babu Sabu Visibility</span>
+              <span style="color: var(--danger-red);">28 Meters (Critical)</span>
+            </div>
+            <div class="stat-pill">
+              <span>Chemical Dew Friction (f)</span>
+              <span style="color: var(--amber-fog);">0.28 (Greasy Slick)</span>
+            </div>
+            <div class="stat-pill">
+              <span>Crash Risk Index (CPI)</span>
+              <span style="color: var(--danger-red);">3.82 (High Collision)</span>
+            </div>
+            <div class="stat-pill">
+              <span>Active Road Police Advisories</span>
+              <span style="color: var(--cyan-hud);">6 Interchanges Closed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Corridors Real-Time Grid -->
+        <div class="corridor-grid">
+          <div class="section-title">
+            <span>High-Risk Punjab Corridors Telemetry</span>
+            <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Data Refreshed via Open-Meteo & NHMP APIs</span>
+          </div>
+
+          <div class="grid-cards">
+            <!-- Card 1 -->
+            <div class="c-card">
+              <div class="c-card-header">
+                <span class="c-title">M-2 Babu Sabu Interchange</span>
+                <span class="badge badge-red">Red Alert</span>
+              </div>
+              <div class="c-metric" style="color: var(--danger-red);">28 m</div>
+              <div class="c-meta">Safe Speed Cap: <b>35 km/h</b> (Normal 120 km/h)</div>
+              <div style="margin-top: 10px; font-size: 11px; color: var(--amber-fog);">⚠️ Unlit cargo trolley risk reported at KM-14</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="c-card">
+              <div class="c-card-header">
+                <span class="c-title">GT Road (Kala Shah Kaku)</span>
+                <span class="badge badge-red">Red Alert</span>
+              </div>
+              <div class="c-metric" style="color: var(--danger-red);">18 m</div>
+              <div class="c-meta">Safe Speed Cap: <b>25 km/h</b> (Convoy Only)</div>
+              <div style="margin-top: 10px; font-size: 11px; color: var(--danger-red);">🚨 Dense industrial sulfate blackout active</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="c-card">
+              <div class="c-card-header">
+                <span class="c-title">M-11 Sialkot Motorway</span>
+                <span class="badge badge-amber">Warning</span>
+              </div>
+              <div class="c-metric" style="color: var(--amber-fog);">42 m</div>
+              <div class="c-meta">Safe Speed Cap: <b>50 km/h</b> (Wet Fog)</div>
+              <div style="margin-top: 10px; font-size: 11px; color: var(--safe-green);">● Moderate visual contrast horizon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SCREEN 2: DRIVER NIGHT HUD (MOBILE iPHONE 16 PRO)
+         ======================================================== -->
+    <section id="screen-hud" class="screen-frame">
+      <div class="phone-mockup-wrapper">
+        <div class="iphone-frame">
+          <div class="dynamic-island"></div>
+          <div class="phone-status-bar">
+            <span>1:42 AM</span>
+            <span>● M-2 BABU SABU</span>
+            <span>5G 100%</span>
+          </div>
+
+          <div class="phone-content">
+            <!-- HUD Speedometer Gauge -->
+            <div class="hud-speed-gauge">
+              <div class="hud-label">SAFE SPEED CEILING (v_max)</div>
+              <div class="hud-big-speed">36</div>
+              <div class="hud-speed-unit">KM/H MANDATORY CAP</div>
+            </div>
+
+            <!-- Sub Metrics Grid -->
+            <div class="hud-sub-grid">
+              <div class="hud-sub-card">
+                <div class="hud-label">SIGHT VISIBILITY</div>
+                <div class="hud-sub-val">28 m</div>
+              </div>
+              <div class="hud-sub-card">
+                <div class="hud-label">STOP DISTANCE</div>
+                <div class="hud-sub-val" style="color: var(--danger-red);">115 m</div>
+              </div>
+              <div class="hud-sub-card">
+                <div class="hud-label">ROAD GRIP (f)</div>
+                <div class="hud-sub-val" style="color: var(--amber-fog);">0.28</div>
+              </div>
+              <div class="hud-sub-card">
+                <div class="hud-label">CRASH PROB (CPI)</div>
+                <div class="hud-sub-val" style="color: var(--danger-red);">3.82</div>
+              </div>
+            </div>
+
+            <!-- Spoken Voice Alert Banner -->
+            <div class="spoken-alert-box">
+              <div class="spoken-title">📢 Spoken Roman Urdu Safety Beacon</div>
+              <div class="spoken-body">"Khatra Shadeed Hai! Motorway par greasy chemical dew ki wajah se break nahi lagegi. Raftaar foran 35 km/h karein aur high beam hargiz on na karein!"</div>
+            </div>
+
+            <!-- Acoustic Warning Button -->
+            <button class="audio-btn" onclick="alert('Playing synthesized Roman Urdu voice beacon!')">
+              🔊 Play Urgent Voice Advisory
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SCREEN 3: CAREEM / INDRIVE NATIVE OVERLAY
+         ======================================================== -->
+    <section id="screen-careem" class="screen-frame">
+      <div class="phone-mockup-wrapper">
+        <div class="iphone-frame">
+          <div class="dynamic-island"></div>
+          
+          <div class="careem-map-bg">
+            <!-- Careem Header -->
+            <div class="careem-header">
+              <div>
+                <div class="careem-brand">Careem Captain</div>
+                <div style="font-size: 11px; color: var(--text-secondary);">Dropoff: Gulberg III Lahore</div>
+              </div>
+              <div class="careem-fare" style="color: #00EB78;">PKR 840</div>
+            </div>
+
+            <!-- Floating SafeGuard Overlay Widget -->
+            <div class="safeguard-overlay-card">
+              <div class="overlay-title-row">
+                <div class="overlay-title">
+                  <span>🛡️ SAFARGUARD CO-PILOT</span>
+                </div>
+                <div class="speed-cap-pill">CAP: 35 KM/H</div>
+              </div>
+              <div class="overlay-body">
+                <b>Chemical Smog Slick Active!</b> Reaction distance exceeds sight line. Stopping sight distance is 110m vs 30m visibility.
+              </div>
+              <div class="hazard-radar-pin">
+                <span>⚠️ HAZARD PIN:</span> Unlit Tractor-Trolley reported 200m ahead in left lane
+              </div>
+            </div>
+
+            <!-- Careem Navigation Bottom Drawer -->
+            <div class="careem-nav-bar">
+              <div class="nav-route-row">
+                <div class="nav-dest">M-2 Exit $\to$ Ring Road</div>
+                <div class="nav-eta">14 min (3.2 km)</div>
+              </div>
+              <button class="nav-btn-green">
+                Follow Safe Speed Corridor (35 km/h)
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SCREEN 4: RESCUE 1122 & FLEET COMMAND CONSOLE
+         ======================================================== -->
+    <section id="screen-fleet" class="screen-frame">
+      <div class="fleet-console">
+        <!-- Sidebar Navigation -->
+        <div class="fleet-sidebar">
+          <div style="font-size: 13px; font-weight: 800; color: var(--danger-red); text-transform: uppercase; margin-bottom: 20px;">
+            🚑 RESCUE 1122 DISPATCH
+          </div>
+          <div style="font-size: 11px; color: var(--text-muted); font-weight: 700; margin-bottom: 8px;">MONITORED REGIONS</div>
+          <div style="font-size: 13px; font-weight: 600; padding: 10px; background: #0F172A; border-radius: 8px; margin-bottom: 6px; border-left: 3px solid var(--danger-red);">
+            Lahore Division (Active)
+          </div>
+          <div style="font-size: 13px; font-weight: 600; padding: 10px; color: var(--text-secondary); margin-bottom: 6px;">
+            Sheikhupura & Muridke
+          </div>
+          <div style="font-size: 13px; font-weight: 600; padding: 10px; color: var(--text-secondary); margin-bottom: 6px;">
+            Gujranwala Division
+          </div>
+          <div style="font-size: 13px; font-weight: 600; padding: 10px; color: var(--text-secondary); margin-bottom: 6px;">
+            Faisalabad M-4 Corridor
+          </div>
+        </div>
+
+        <!-- Main Map & Telemetry -->
+        <div class="fleet-main">
+          <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 16px;">Central Punjab Collision Risk Heatmap</h3>
+          <div style="height: 380px; background: #0B1224; border: 1px solid var(--border-subtle); border-radius: 14px; position: relative; overflow: hidden; padding: 24px;">
+            <div style="position: absolute; top: 20px; left: 20px; background: rgba(15,23,42,0.9); padding: 12px 18px; border-radius: 10px; font-size: 12px; border: 1px solid var(--border-active);">
+              <div><b>Active Corridors Under Monitoring:</b> 10 Routes</div>
+              <div style="color: var(--danger-red);"><b>High Collision Risk Zones:</b> 4 Geohash Sectors</div>
+            </div>
+            
+            <!-- Simulated Pulse Nodes on Highway -->
+            <div style="position: absolute; top: 180px; left: 320px; text-align: center;">
+              <div style="width: 24px; height: 24px; background: rgba(239, 68, 68, 0.4); border: 2px solid var(--danger-red); border-radius: 50%; margin: 0 auto;"></div>
+              <div style="font-size: 10px; font-weight: 700; color: var(--danger-red); margin-top: 4px;">M-2 Babu Sabu (CPI 3.82)</div>
+            </div>
+
+            <div style="position: absolute; top: 240px; left: 480px; text-align: center;">
+              <div style="width: 20px; height: 20px; background: rgba(245, 158, 11, 0.4); border: 2px solid var(--amber-fog); border-radius: 50%; margin: 0 auto;"></div>
+              <div style="font-size: 10px; font-weight: 700; color: var(--amber-fog); margin-top: 4px;">Kala Shah Kaku (CPI 1.95)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emergency Feed -->
+        <div class="fleet-feed">
+          <div style="font-size: 13px; font-weight: 800; color: var(--text-secondary); margin-bottom: 16px;">
+            LIVE INCIDENT ESCALATIONS
+          </div>
+          
+          <div class="feed-card">
+            <div class="feed-time">01:38 AM • M-2 KM-18</div>
+            <div class="feed-text">Emergency Diversion Broadcast: Babu Sabu entrance sealed. Telemetry indicates 3 trailing vehicles decelerated to safe corridor speed (35 km/h).</div>
+          </div>
+
+          <div class="feed-card" style="border-left-color: var(--amber-fog);">
+            <div class="feed-time">01:22 AM • GT ROAD MURIDKE</div>
+            <div class="feed-text">Unlit Tractor-Trolley Telemetry Logged: InDrive driver camera detected silhouette at 22m. Hazard geofence broadcasted.</div>
+          </div>
+
+          <div class="feed-card" style="border-left-color: var(--safe-green);">
+            <div class="feed-time">01:05 AM • M-11 SIALKOT</div>
+            <div class="feed-text">Visibility elevated to 45m. Advisory updated to 50 km/h safe speed limit.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Figma Tokens Specification Banner -->
+  <div class="figma-spec-footer">
+    <div class="spec-text">
+      <h4>Figma Design Tokens & Screen Architecture Ready</h4>
+      <p>4 Screens Crafted: Web Corridor Portal, Mobile Driver Night HUD, Careem In-App Floating Overlay, and Rescue 1122 Command Console.</p>
+    </div>
+    <button class="export-btn" onclick="alert('Design tokens, master SVG logo, and specs are saved in g:\\SafeGuard\\figma and docs/!')">
+      View Figma Specs & Tokens
+    </button>
+  </div>
+
+  <script>
+    function switchScreen(screenId) {
+      document.querySelectorAll('.screen-frame').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(screenId).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

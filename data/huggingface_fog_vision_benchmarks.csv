@@ -1,0 +1,7 @@
+sample_id,image_scenario,optical_depth_tau,ground_truth_visibility_m,aerosol_extinction_beta,contrast_transmission_pct,detected_glare_backscatter,hazard_category,gemma4_confidence_score
+HF_FOG_001,M-2 Daybreak Heavy Smog,1.85,32.0,0.122,2.4,Moderate,Stalled Pickup Truck,0.94
+HF_FOG_002,GT Road Midnight Dew,2.40,18.5,0.211,0.8,Severe High-Beam Scatter,Unlit Sugarcane Trolley,0.98
+HF_FOG_003,M-11 Dusk Chemical Fog,1.45,45.0,0.087,4.1,Low,Clear Corridor,0.91
+HF_FOG_004,Ring Road L-20 Smog Inversion,1.95,28.0,0.139,1.9,Severe High-Beam Scatter,Stationary Bus On Shoulder,0.96
+HF_FOG_005,Sukheki Salt Range Fog Bank,2.60,15.0,0.260,0.5,Extreme Blinding Glare,Broken Concrete Barrier,0.99
+HF_FOG_006,Muridke Industrial Sulfates,2.15,22.0,0.177,1.2,High Scatter,Unlit Bullock Cart,0.95

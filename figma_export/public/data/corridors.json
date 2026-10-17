@@ -1,0 +1,32 @@
+[
+  {
+    "id": "m2",
+    "route": "M-2",
+    "name": "Babu Sabu",
+    "journey": "Lahore → Islamabad",
+    "location": "Lahore approach",
+    "visibility": 28,
+    "friction": 0.28,
+    "condition": "Very low visibility"
+  },
+  {
+    "id": "m11",
+    "route": "M-11",
+    "name": "Daska Interchange",
+    "journey": "Lahore → Sialkot",
+    "location": "Daska / Sialkot",
+    "visibility": 42,
+    "friction": 0.36,
+    "condition": "Reduced visibility"
+  },
+  {
+    "id": "n5",
+    "route": "N-5",
+    "name": "Kala Shah Kaku",
+    "journey": "GT Road → Gujranwala",
+    "location": "Northbound approach",
+    "visibility": 18,
+    "friction": 0.24,
+    "condition": "Very low visibility"
+  }
+]

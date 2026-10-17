@@ -1,0 +1,7 @@
+corridor_name,district,winter_emergency_calls_per_month,baseline_summer_calls,pct_increase_in_smog,avg_response_time_fog_min,primary_accident_type
+M-2 Motorway (Babu Sabu - Sheikhupura),Lahore/Sheikhupura,418,270,54.8,16.5,Multi-Vehicle Highway Pileup
+GT Road (Kala Shah Kaku - Gujranwala),Sheikhupura/Gujranwala,532,320,66.3,18.2,Tractor-Trolley Rear-End Collision
+M-11 Motorway (Lahore - Daska),Lahore/Sialkot,285,180,58.3,14.8,High-Speed Slip Collision
+Ferozepur Road (Chungi Amar Sidhu - Kasur),Lahore/Kasur,390,295,32.2,12.4,Motorcycle / Rickshaw Underrun
+Canal Bank Road (Thokar - Harbanspura),Lahore,315,260,21.2,11.0,Canal Verge Slippage & Pier Collisions
+Multan Road (Thokar - Manga Mandi),Lahore,340,245,38.8,15.1,Heavy Intercity Bus Collision

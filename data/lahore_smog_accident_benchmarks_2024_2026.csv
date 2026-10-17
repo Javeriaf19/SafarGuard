@@ -1,0 +1,10 @@
+date,corridor,visibility_meters,humidity_pct,pm25_ug_m3,surface_condition,friction_coeff_f,typical_speed_kmh,stopping_distance_m,crash_probability_index,reported_pileups_24h
+2024-11-12,M-2 Babu Sabu Interchange,35,91,412,Chemical Smog Dew,0.27,95,114.2,3.26,3
+2024-11-28,GT Road Kala Shah Kaku,22,94,480,Greasy Soot Film,0.25,80,92.6,4.21,5
+2024-12-15,M-11 Lahore-Sialkot Sambrial,45,88,340,Wet Fog Slick,0.31,105,121.8,2.71,2
+2025-01-04,Lahore Ring Road Northern Loop,60,82,295,Damp Chemical Dew,0.34,90,78.4,1.31,1
+2025-01-18,Multan Road Manga Mandi,18,96,520,Greasy Soot Film,0.24,75,86.2,4.79,4
+2025-11-20,M-2 Sukheki Service Area,30,92,390,Chemical Smog Dew,0.28,100,123.5,4.12,3
+2025-12-10,GT Road Muridke,25,95,465,Greasy Soot Film,0.26,85,99.8,3.99,6
+2026-01-08,M-2 Kot Abdul Malik,40,89,360,Chemical Smog Dew,0.29,110,135.2,3.38,2
+2026-01-22,M-11 Kala Khatty Interchange,20,97,510,Greasy Soot Film,0.25,80,92.6,4.63,4

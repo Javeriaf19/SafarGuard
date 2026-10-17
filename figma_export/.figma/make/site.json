@@ -1,0 +1,10 @@
+{
+  "description": "Real-time highway safety portal providing visibility, road grip, and collision risk alerts with interactive tools to help Pakistani drivers prevent smog-related accidents.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
