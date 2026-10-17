@@ -3,6 +3,8 @@ import { maximumModelSpeed, stoppingDistance } from "./lib/safety"
 import SafetyOverlay from "./SafetyOverlay"
 import CorridorMap from "./CorridorMap"
 import GroundRealityPanel from "./GroundRealityPanel"
+import wetMotorwayImg from "./assets/wet-motorway.jpg"
+import smogHighwayImg from "./assets/smog-highway-reference.png"
 
 const CommandConsole = lazy(() => import("./CommandConsole"))
 
@@ -446,7 +448,7 @@ function Dashboard() {
           <figure className="hero-visual">
             <div className="hero-photo">
               <img
-                src="/images/wet-motorway.jpg"
+                src={wetMotorwayImg}
                 alt="Vehicles travelling on a wet motorway with spray reducing visibility"
                 fetchPriority="high"
               />
@@ -1011,7 +1013,7 @@ function Dashboard() {
         >
           <div className="research-image">
             <img
-              src="/images/smog-highway-reference.png"
+              src={smogHighwayImg}
               alt="Project-supplied photograph of highway traffic in dense smog, with an inset showing a bus and a roadside incident"
               loading="lazy"
             />
