@@ -137,6 +137,13 @@ It is 10:45 PM on December 14. **Usman**, a 34-year-old software architect, is d
    - However, visible optical penetration through the windshield is only **40 meters**.
    - **Usman is outdriving his visible horizon by 176 meters.** A stationary unlit tractor-trolley or stalled bus 50 meters ahead is mathematically unavoidable.
 
+<p align="center">
+  <img src="assets/evidence/unlit_tractor_trolley_smog_hazard.jpg" width="85%" alt="Unlit sugarcane tractor-trolley stalled in smog across Lahore Motorway lanes" />
+</p>
+<p align="center">
+  <em>Figure 3: Usman's Blind Crash Horizon — An unlit sugarcane tractor-trolley stalled across lanes in dense smog near Sheikhupura, completely invisible until within 40 meters.</em>
+</p>
+
 ```mermaid
 flowchart TD
     subgraph NORMAL["1. Normal Clear Roadway (Dry Asphalt, 100 km/h)"]
@@ -174,6 +181,13 @@ SafarGuard operates in Usman's cabin via the smartphone mount:
    > *"Khatra shadeed hai! Samnay sirf 40 meter nazar aa raha hai aur sarak phisal rahi hai. Gaari foran 35 km/h par karein aur low beam chalayein!"*
 5. **Night HUD Guidance**: The phone screen switches to high-contrast zero-glare OLED mode, displaying a green-amber-red safe speed ceiling dial, enabling Usman to decelerate safely 400 meters before reaching an unlit sugarcane truck stalled across lane 2.
 
+<p align="center">
+  <img src="assets/evidence/safarguard_hud_usman_intervention.jpg" width="85%" alt="SafarGuard Cockpit Night HUD Warning in Usman's Car on Lahore Motorway" />
+</p>
+<p align="center">
+  <em>Figure 4: SafarGuard Autonomous Intervention — Active cabin view inside Usman's car on the Lahore Motorway. SafarGuard calculates CPI = 5.40 (Critical Hazard), broadcasts the Roman Urdu acoustic warning ("Aage fog hai, speed kam karein..."), and enforces the dynamic 35 km/h safe speed ceiling on the OLED HUD dial.</em>
+</p>
+
 ---
 
 ## 3. The Highway Smog Crisis: Physics and Empirical Evidence
@@ -189,10 +203,24 @@ Official highway crash registries maintained by Rescue 1122 and NHMP show clear 
 | **M-4 (Pindi Bhattian to Faisalabad)** | Rural agricultural smoke plumes | 00:00 - 06:30 | 0.27 - 0.31 | Heavy sugarcane freight breakdowns |
 
 <p align="center">
+  <img src="assets/evidence/friction_drop_infographic.jpg" width="85%" alt="Kinematics of Chemical Dew Friction Collapse from f=0.70 to f=0.28" />
+</p>
+<p align="center">
+  <em>Figure 5: The Kinematics of Friction Collapse — How overnight chemical dew and particulate soot create a microscopic greasy barrier on motorway asphalt, reducing tire grip from f = 0.70 down to f = 0.28.</em>
+</p>
+
+<p align="center">
+  <img src="assets/evidence/chemical_dew_asphalt_macro.jpg" width="85%" alt="Ground Reality Macro View of Chemical Dew on Motorway Tarmac" />
+</p>
+<p align="center">
+  <em>Figure 6: Microscopic Road Slick — Macro photograph of tire tread on chemical dew asphalt along the Lahore Motorway corridor, illustrating lost friction under sodium street illumination.</em>
+</p>
+
+<p align="center">
   <img src="assets/evidence/punjab_highway_bus_crash.jpg" width="85%" alt="Fatal Highway Bus and Freight Crash in Dense Punjab Fog" />
 </p>
 <p align="center">
-  <em>Figure 3: Mass Casualty Consequence — Fatal passenger bus and freight collision along Punjab highway corridors resulting from unlit obstacle outdriving and friction collapse.</em>
+  <em>Figure 7: Mass Casualty Consequence — Fatal passenger bus and freight collision along Punjab highway corridors resulting from unlit obstacle outdriving and friction collapse.</em>
 </p>
 
 ---
@@ -480,12 +508,17 @@ SafarGuard/
 ├── assets/                                       # Official brand and empirical evidence assets
 │   ├── safarguard_master_logo.png                # Official master shield logo (Dark OLED)
 │   ├── safarguard_master_logo.svg                # Master vector logo
-│   └── evidence/                                 # Verified Pakistan Highway crash evidence
+│   └── evidence/                                 # Verified Pakistan Highway crash & cockpit evidence
+│       ├── highway_smog_pileup_hero.png          # Master banner: Multi-vehicle pileup under streetlights
 │       ├── m2_motorway_pileup.jpg                # Dawn News M-2 Kot Abdul Malik crash photo
 │       ├── rescue1122_truck_extrication.jpg      # Multan-Sukkur M-5 Rescue 1122 photo
 │       ├── nhmp_police_fog_patrol.jpg            # NHMP Motorway fog pilot escort
 │       ├── punjab_highway_bus_crash.jpg          # N-5 National Highway passenger bus collision
-│       └── lahore_ring_road_smog.jpg             # LRR hazardous chemical haze
+│       ├── lahore_ring_road_smog.jpg             # LRR hazardous chemical haze
+│       ├── unlit_tractor_trolley_smog_hazard.jpg # Stalled sugarcane freight hazard on M-2
+│       ├── safarguard_hud_usman_intervention.jpg # Active cabin OLED Night HUD & Urdu voice alert
+│       ├── friction_drop_infographic.jpg         # 4-stage chemical dew friction drop breakdown
+│       └── chemical_dew_asphalt_macro.jpg        # Microscopic road slick on highway asphalt
 │
 ├── data/                                         # Empirical research and benchmark datasets
 │   ├── huggingface_fog_vision_benchmarks.csv     # Atmospheric aerosol contrast benchmarks
