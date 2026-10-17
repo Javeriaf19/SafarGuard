@@ -253,7 +253,51 @@ flowchart TD
 
 SafarGuard is decoupled into a modular, production-ready full-stack architecture:
 
-### 7.1 Frontend: High-Performance React Web Application
+### 7.1 Component Dataflow & Communication Topology
+
+```mermaid
+flowchart LR
+    subgraph CLIENT["Frontend Client (React 19 + TypeScript)"]
+        direction TB
+        UI1["Public Corridor Monitor"]
+        UI2["Driver Careem Companion"]
+        UI3["Police & Rescue Console"]
+        UI4["Night OLED HUD Dial"]
+        UI5["Stopping Simulator"]
+    end
+
+    subgraph ENGINE["Backend Microservice (Python 3.12)"]
+        direction TB
+        AASHTO_CORE["AASHTO Physics Engine<br>SSD = v·tr + v²/(2gf)"]
+        SPEED_CALC["Quadratic Speed Solver<br>Safe Speed Ceiling"]
+        GEMMA_PIPELINE["Google DeepMind Gemma 4<br>Multimodal Vision Pipeline"]
+    end
+
+    subgraph EXTERNAL["External Services & Edge Telemetry"]
+        direction TB
+        GEMINI_API["Google AI Studio API / Groq Fallback"]
+        NHMP_HOOK["NHMP Toll VMS & Rescue 1122 Webhook"]
+        DASH_CAM["Windshield Dashcam Stream Feed"]
+    end
+
+    UI1 <-->|REST API / State| AASHTO_CORE
+    UI2 <-->|Live Proximity Events| SPEED_CALC
+    UI3 <-->|Advisory Broadcasts| NHMP_HOOK
+    DASH_CAM -->|Optical Frame| GEMMA_PIPELINE
+    GEMMA_PIPELINE <-->|Multimodal Vision Inference| GEMINI_API
+    GEMMA_PIPELINE -->|Glare & Visibility Signals| AASHTO_CORE
+```
+
+### 7.2 Architecture & Contract Comparison Table
+
+| Architectural Layer | Technology Stack | Key Responsibilities | Data Contracts & State |
+| :--- | :--- | :--- | :--- |
+| **Frontend Web App** | React 19, TypeScript, Vite 6, Tailwind CSS, Lucide Icons | Responsive rendering of 5 stakeholder interfaces, live corridor risk table, OLED dark cockpit gauge, and speech synthesis. | Consumes corridor telemetry JSON; maintains zero persistent cookies or tracking data. |
+| **Physics Backend** | Python 3.12, Streamlit Engine, NumPy, Pandas | Deterministic AASHTO stopping distance calculation, chemical dew friction degradation curves ($f=0.70 \to 0.28$), quadratic safe speed solver. | Exposes REST endpoints; computes $SSD$, $CPI$, and $v_{\text{safe}}$ in $<5\text{ms}$. |
+| **Multimodal Vision** | Google DeepMind Gemma 4 (`gemma-4-31b`), Google GenAI SDK | Audits windshield dashcam frames for aerosol backscatter glare, optical transmission loss, and unlit stationary obstacles. | Returns structured JSON confidence vectors into the AASHTO physics core. |
+| **Fallback Engine** | Groq Cloud (`llama-3.3-70b-versatile`) + Local Heuristics | Zero-downtime fallback if Google Gemini quota is exceeded or offline connectivity occurs. | Environment-driven via `GEMINI_MODEL` and `GROQ_API_KEY`. |
+
+### 7.3 Frontend: High-Performance React Web Application
 Located in [`figma_export/`](figma_export/), the frontend is engineered using modern web technologies:
 - **Core Framework**: React 19 with TypeScript, bundled with Vite for near-instant hot module replacement and production tree-shaking.
 - **Styling Architecture**: Tailwind CSS with customized dark OLED palettes (`#050811`, `#0a1124`, cyan `#06b6d4`, amber `#f59e0b`, emergency red `#ef4444`).
@@ -265,14 +309,14 @@ Located in [`figma_export/`](figma_export/), the frontend is engineered using mo
   4. `NightHUD`: Minimalist black-background cockpit gauge with animated speed ceiling arc and synthesized audio warnings.
   5. `StoppingSimulator`: Interactive SVG rendering comparing human perception, vehicle braking distance, and optical line-of-sight.
 
-### 7.2 Backend: Deterministic Physics Engine & Gemma 4 Vision Pipeline
+### 7.4 Backend: Deterministic Physics Engine & Gemma 4 Vision Pipeline
 Located in [`app.py`](app.py), the backend provides high-performance simulation and AI auditing:
 - **Runtime Environment**: Python 3.12 with Streamlit application framework for rapid real-time telemetry rendering.
 - **Physics Computations**: Deterministic implementation of AASHTO stopping distance formulas, friction degradation curves, and quadratic safe speed ceilings.
 - **Google DeepMind Gemma 4 Vision Integration**: Leverages the official Google GenAI SDK to send windshield imagery to `gemma-4-31b` or `gemini-2.5-flash` for optical density classification, high-beam backscatter detection, and unlit obstacle localization.
 - **Telemetry Endpoints**: RESTful JSON serialization enabling external connected-car applications and highway overhead digital signs (VMS) to consume corridor speed recommendations.
 
-### 7.3 Unified Architecture & Service Interconnection
+### 7.5 Unified Architecture & Service Interconnection
 The frontend and backend communicate seamlessly:
 - **Development**: The React web client runs on `http://localhost:5173` while the Python simulation engine runs on `http://localhost:8501`.
 - **Production Architecture**: The frontend compiles to static optimized assets deployed on **Vercel**, while the backend Python engine deploys on **Railway** or **Google Cloud Run**. The frontend consumes live telemetry via REST API calls and server-sent events, providing a unified single-URL experience for judges and end users.
@@ -336,77 +380,100 @@ SafarGuard was engineered specifically for **Hacktoberfest Hack Day Lahore 2026*
 ### 11.1 Best Use of Gemma 4 (Google DeepMind)
 - **Challenge**: Deliver a multimodal, lightweight, open AI assistant that understands more of what users share.
 - **SafarGuard Implementation**: Integrates Google DeepMind's Gemma 4 multimodal model to audit forward windshield dashcam streams under extreme winter smog. Gemma 4 analyzes low-contrast visual feeds, quantifies high-beam aerosol backscatter glare, isolates unlit highway hazards (such as broken-down freight trucks and agricultural trolleys), and returns structured JSON confidence vectors directly into the AASHTO physics core.
-- **Sponsor Usage Answer**:
+- **Category Challenge & Technical Justification**:
   > SafarGuard utilizes Google DeepMind's Gemma 4 multimodal open-weight vision model to inspect windshield dashcam feeds under dense winter smog. Gemma 4 classifies aerosol backscatter glare, detects unlit stationary obstacles, and estimates optical visibility distance, piping real-time telemetry into our AASHTO stopping sight distance physics engine.
 
 ### 11.2 Best Open-Source AI Project (DigitalOcean)
 - **Challenge**: Build an original project that uses open-source or open-weight AI as an important part of how it works, published under an open-source license with agent skill standard compliance.
 - **SafarGuard Implementation**: Published 100% open-source under the MIT License with a compliant `SKILL.md` agent harness. Integrates open-weight Gemma 4 models alongside empirical highway emergency benchmark datasets.
-- **Sponsor Usage Answer**:
+- **Category Challenge & Technical Justification**:
   > SafarGuard is an open-source highway collision prevention engine combining open-weight Gemma 4 AI with deterministic AASHTO stopping-distance physics. Published under the MIT License, it implements the Agent Skill Open Standard (SKILL.md) to provide autonomous AI agents and emergency dispatch services with real-time highway hazard APIs and open incident datasets.
 
 ---
 
-## 12. Repository Architecture & Flowchart
+## 12. Repository Architecture & Directory Structure
 
 ```mermaid
 flowchart TD
-    ROOT["SafarGuard Root Directory"]
+    ROOT["SafarGuard System Root"]
 
-    subgraph CONFIG["Root Configuration & Tooling"]
-        ENV[".env.example<br>API Credentials Template"]
-        GIT[".gitignore<br>Excludes node_modules & cache"]
-        LIC["LICENSE<br>MIT Open-Source"]
-        README["README.md<br>Master Engineering Docs"]
-        SKILL["SKILL.md<br>Agent Skill Open Standard"]
-        PY_APP["app.py<br>Streamlit Physics & Vision Backend"]
-        REQ["requirements.txt<br>Python Dependencies"]
+    subgraph PRESENTATION["Presentation & Client Layer"]
+        FRONTEND["figma_export/ — React 19 Client Web Application<br>• App.tsx: Public Motorway Corridor Monitor<br>• SafetyOverlay.tsx: Careem Driver Mobile HUD<br>• CommandConsole.tsx: Police & Rescue 1122 Dispatch Console"]
+        ASSETS["assets/ & slides/<br>• Canonical Master Logo (PNG/SVG)<br>• Verified Crash Evidence Photos (Rescue 1122 / NHMP)<br>• Official Hackathon Pitch Deck & Slides PDF"]
     end
 
-    subgraph ASSETS["assets/ — Official Branding"]
-        PNG["safarguard_master_logo.png<br>Master Canonical Logo"]
-        SVG["safarguard_master_logo.svg<br>Vector Master Logo"]
+    subgraph ENGINE["Core Intelligence & Physics Engine"]
+        BACKEND["app.py — Python Physics & Vision Backend<br>• AASHTO Kinetic Stopping Sight Distance Equations<br>• Gemini / Gemma 4 Multimodal Dashcam Vision Core<br>• Dual Groq Cloud AI Low-Latency Fallback"]
+        DATA["data/ — Empirical Ground Truth Datasets<br>• 4 Verified Highway Smog & Crash Benchmark CSV Records<br>• Rescue 1122 Statistical Records & NHMP Closure Rules"]
     end
 
-    subgraph DATA["data/ — Empirical Research Datasets"]
-        D1["lahore_smog_accident_benchmarks_2024_2026.csv"]
-        D2["nhmp_motorway_closure_criteria.csv"]
-        D3["punjab_rescue_1122_smog_corridor_stats.csv"]
-        D4["huggingface_fog_vision_benchmarks.csv"]
+    subgraph STANDARDS["Open Standards, Docs & Governance"]
+        DOCS["docs/ — Engineering & Design Specifications<br>• PRD, TRD, System Architecture & Safety Protocols"]
+        GOV["Community & Open-Source Governance<br>• MIT License, Agent SKILL.md Open Standard<br>• Technical FAQs for Judges & Audience"]
     end
 
-    subgraph DOCS["docs/ — Engineering & Design Specifications"]
-        PRD["01_PRD.md & 02_TRD.md"]
-        UI_BRIEF["03_UI_UX_DESIGN_BRIEF.md"]
-        STATE["04_APP_FLOW_AND_STATE_MACHINE.md"]
-        SCHEMA["05_BACKEND_SCHEMA_AND_API_CONTRACTS.md"]
-        ARCH["07_SYSTEM_ARCHITECTURE.md"]
-        RULES["08_RULES_AND_COMPLIANCE.md"]
-        CITATIONS["13_RESEARCH_AND_DATA_CITATIONS.md"]
-        FIGMA_DOC["FIGMA_DESIGN_SYSTEM_AND_SCREENS.md"]
-    end
+    ROOT --> PRESENTATION
+    PRESENTATION --> ENGINE
+    ENGINE --> STANDARDS
+```
 
-    subgraph FRONTEND["figma_export/ — React 19 Web Application"]
-        F_SRC["src/"]
-        F_APP["App.tsx<br>Public Corridor Monitor & Shell"]
-        F_SAFETY["SafetyOverlay.tsx<br>Careem Driver Mobile HUD"]
-        F_CONSOLE["CommandConsole.tsx<br>Police & Rescue 1122 Desk"]
-        F_DIST["dist/<br>Compiled Production Assets"]
-        F_PUB["public/<br>Static Favicons & Datasets"]
-    end
+### Complete Repository Directory Tree
 
-    subgraph SLIDES["slides/ — Official Pitch Deck Assets"]
-        DECK_PPTX["SafarGuard_Hackathon_Pitch.pptx<br>Official Presentation Deck"]
-        DECK_HTML["index.html<br>Interactive 7-Slide Web Deck"]
-        DECK_BAT["open_powerpoint_deck.bat<br>One-Click PPTX Launcher"]
-    end
-
-    ROOT --> CONFIG
-    ROOT --> ASSETS
-    ROOT --> DATA
-    ROOT --> DOCS
-    ROOT --> FRONTEND
-    ROOT --> SLIDES
+```
+SafarGuard/
+├── .env.example                                  # Template for Gemini and Groq API keys
+├── .gitignore                                    # Excludes node_modules, .env, and cache
+├── FAQ.md                                        # Technical FAQs for hackathon judges & audience
+├── LICENSE                                       # MIT Open-Source License
+├── README.md                                     # Master technical documentation
+├── SKILL.md                                      # Autonomous AI Agent skill specification
+├── app.py                                        # Streamlit AASHTO physics & Gemma 4 vision core
+├── requirements.txt                              # Python runtime dependencies
+├── open_presentation_slides.bat                  # One-click web pitch deck launcher
+├── open_powerpoint_deck.bat                      # One-click PowerPoint pitch deck launcher
+│
+├── assets/                                       # Official brand and empirical evidence assets
+│   ├── safarguard_master_logo.png                # Official master shield logo (Dark OLED)
+│   ├── safarguard_master_logo.svg                # Master vector logo
+│   └── evidence/                                 # Verified Pakistan Highway crash evidence
+│       ├── m2_motorway_pileup.jpg                # Dawn News M-2 Kot Abdul Malik crash photo
+│       ├── rescue1122_truck_extrication.jpg      # Multan-Sukkur M-5 Rescue 1122 photo
+│       ├── nhmp_police_fog_patrol.jpg            # NHMP Motorway fog pilot escort
+│       ├── punjab_highway_bus_crash.jpg          # N-5 National Highway passenger bus collision
+│       └── lahore_ring_road_smog.jpg             # LRR hazardous chemical haze
+│
+├── data/                                         # Empirical research and benchmark datasets
+│   ├── huggingface_fog_vision_benchmarks.csv     # Atmospheric aerosol contrast benchmarks
+│   ├── lahore_smog_accident_benchmarks_2024_2026.csv # Verified seasonal incident numbers
+│   ├── nhmp_motorway_closure_criteria.csv        # National Highway & Motorway Police thresholds
+│   └── punjab_rescue_1122_smog_corridor_stats.csv# Punjab Emergency Services winter call volume
+│
+├── docs/                                         # Engineering and architectural specifications
+│   ├── 01_PRD.md                                 # Product Requirements Document
+│   ├── 02_TRD.md                                 # Technical Requirements Document
+│   ├── 03_UI_UX_DESIGN_BRIEF.md                  # Design system tokens and styling principles
+│   ├── 04_APP_FLOW_AND_STATE_MACHINE.md          # State transition logic and risk state machines
+│   ├── 05_BACKEND_SCHEMA_AND_API_CONTRACTS.md    # REST endpoints and JSON data schemas
+│   ├── 07_SYSTEM_ARCHITECTURE.md                 # System components and edge/cloud topology
+│   ├── 08_RULES_AND_COMPLIANCE.md                # Safety standards and regulatory compliance
+│   ├── 13_RESEARCH_AND_DATA_CITATIONS.md         # Academic and empirical ground-truth citations
+│   └── FIGMA_DESIGN_SYSTEM_AND_SCREENS.md        # Screen-by-screen UX design specifications
+│
+├── figma_export/                                 # React 19 + Vite + Tailwind CSS frontend
+│   ├── package.json                              # Node.js project manifest & scripts
+│   ├── src/
+│   │   ├── App.tsx                               # Primary public corridor monitor
+│   │   ├── SafetyOverlay.tsx                     # Floating mobile HUD for drivers
+│   │   ├── CommandConsole.tsx                    # Multi-camera desk for emergency dispatchers
+│   │   └── main.tsx                              # Application entrypoint
+│   └── dist/                                     # Production build output
+│
+└── slides/                                       # Official Hackathon Pitch Deck & Slides
+    ├── SafarGuard_Pitch_Deck.pdf                 # Direct in-browser PDF deck for GitHub
+    ├── SafarGuard_Hackathon_Pitch.pptx           # Official Microsoft PowerPoint pitch deck
+    ├── index.html                                # Interactive 7-slide web presentation
+    └── deck_preview/                             # High-resolution slide panels (1 to 7)
+        ├── slide_1.jpg to slide_7.jpg
 ```
 
 ---
@@ -443,8 +510,10 @@ SafarGuard is deliberately architected as a modular, extensible open-source plat
 ## 14. Pitch Deck and Presentation Assets
 
 SafarGuard includes a complete set of presentation assets ready for judging:
-- **Official Presentation Deck**: Access [`slides/SafarGuard_Hackathon_Pitch.pptx`](slides/SafarGuard_Hackathon_Pitch.pptx) or double-click [`open_powerpoint_deck.bat`](open_powerpoint_deck.bat) to launch the widescreen PowerPoint pitch deck.
+- **In-Browser Slide Deck (PDF)**: Immediate full-screen presentation directly on GitHub without downloading via [`slides/SafarGuard_Pitch_Deck.pdf`](slides/SafarGuard_Pitch_Deck.pdf).
+- **Official Presentation Deck (PowerPoint)**: Access [`slides/SafarGuard_Hackathon_Pitch.pptx`](slides/SafarGuard_Hackathon_Pitch.pptx) or double-click [`open_powerpoint_deck.bat`](open_powerpoint_deck.bat) to launch the widescreen PowerPoint pitch deck.
 - **Interactive Web Pitch Deck**: Launch [`slides/index.html`](slides/index.html) in any browser or double-click [`open_presentation_slides.bat`](open_presentation_slides.bat) for full keyboard-navigated widescreen slides.
+- **Slide Gallery & Transcripts**: Dedicated slide-by-slide visual panels and pitch outline available in [`SLIDES.md`](SLIDES.md).
 
 ---
 

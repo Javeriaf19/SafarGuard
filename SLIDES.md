@@ -4,30 +4,41 @@ SafarGuard includes a complete set of presentation assets ready for judging and 
 
 ---
 
-## Presentation Files
+## Direct In-Browser Presentation Access
 
-### 1. Official PowerPoint Pitch Deck (.pptx)
-- **File**: [`slides/SafarGuard_Hackathon_Pitch.pptx`](slides/SafarGuard_Hackathon_Pitch.pptx)
-- **Format**: 16:9 Widescreen Presentation
-- **One-Click Launcher (Windows)**: Double-click [`open_powerpoint_deck.bat`](open_powerpoint_deck.bat) in the repository root to immediately launch the slides in Microsoft PowerPoint.
+GitHub cannot preview `.pptx` PowerPoint files directly in the browser. To solve this, SafarGuard provides direct **in-browser PDF previewing**, an **interactive web presentation**, and high-resolution slide panels:
 
-### 2. Interactive Web Pitch Deck (HTML)
-- **File**: [`slides/index.html`](slides/index.html)
-- **Format**: Keyboard-navigated interactive web presentation matching the dark OLED cyber-automotive theme.
-- **One-Click Launcher (Windows)**: Double-click [`open_presentation_slides.bat`](open_presentation_slides.bat) in the repository root to open the deck in your default browser.
-- **Keyboard Controls**:
-  - `→` / `Space` / `Page Down`: Next Slide
-  - `←` / `Page Up`: Previous Slide
-  - `F`: Toggle Fullscreen
+| Format | Access Link | Best For |
+| :--- | :--- | :--- |
+| **In-Browser PDF Deck** | [`slides/SafarGuard_Pitch_Deck.pdf`](slides/SafarGuard_Pitch_Deck.pdf) | Immediate 1-click full-screen review on GitHub with zero downloads. |
+| **Interactive Web Deck** | [`slides/index.html`](slides/index.html) | Keyboard-navigated widescreen presentation matching the dark OLED theme. |
+| **PowerPoint Deck (.pptx)** | [`slides/SafarGuard_Hackathon_Pitch.pptx`](slides/SafarGuard_Hackathon_Pitch.pptx) | Local Microsoft PowerPoint presentation. |
+| **Windows One-Click Launcher** | [`open_powerpoint_deck.bat`](open_powerpoint_deck.bat) | Instant launch on Windows machines. |
 
 ---
 
-## Slide Outline
+## Slide Deck Gallery (7 Slides)
 
-1. **Title & Problem Statement**: The Invisible Smog Hazard on Punjab Motorways (M-2, M-11, N-5).
-2. **Empirical Crash Data**: Rescue 1122 +34.8% dispatch spike; chemical dew friction collapse ($f=0.70 \to 0.28$).
-3. **The Physics Failure**: Stopping Sight Distance ($SSD$) blowing out from 98m to 216m while sight is restricted to 40m.
-4. **SafarGuard Solution**: Fusing AASHTO kinematic physics with Google DeepMind Gemma 4 multimodal vision.
-5. **System Architecture & 5 Stakeholder Views**: Public Corridor Monitor, Driver Careem Companion, Police Console, Night HUD, and Stopping Simulator.
-6. **Double Prize Alignment**: Google DeepMind Gemma 4 + DigitalOcean Best Open-Source AI Project.
-7. **Roadmap & Impact**: Saving lives across 1,200+ km of high-speed inter-city transit.
+<p align="center">
+  <img src="slides/deck_preview/slide_1.jpg" width="90%" alt="Slide 1 - Problem Statement & Title" /><br/><br/>
+  <img src="slides/deck_preview/slide_2.jpg" width="90%" alt="Slide 2 - Empirical Highway Collision Data" /><br/><br/>
+  <img src="slides/deck_preview/slide_3.jpg" width="90%" alt="Slide 3 - Stopping Sight Distance Physics Failure" /><br/><br/>
+  <img src="slides/deck_preview/slide_4.jpg" width="90%" alt="Slide 4 - SafarGuard Autonomous Solution" /><br/><br/>
+  <img src="slides/deck_preview/slide_5.jpg" width="90%" alt="Slide 5 - System Architecture & 5 Stakeholder Views" /><br/><br/>
+  <img src="slides/deck_preview/slide_6.jpg" width="90%" alt="Slide 6 - Google DeepMind & DigitalOcean Prize Alignment" /><br/><br/>
+  <img src="slides/deck_preview/slide_7.jpg" width="90%" alt="Slide 7 - Roadmap & Highway Scale" />
+</p>
+
+---
+
+## Slide Outline & Key Takeaways
+
+1. **Slide 1 — Don't Outdrive What You Can See**: Introducing SafarGuard as the Autonomous Smog Collision Prevention Engine for Punjab Highways.
+2. **Slide 2 — The Ground Reality Crisis**: Rescue 1122 dispatches surge +34.8% in winter; multi-vehicle pileups on M-2, M-11, and N-5.
+3. **Slide 3 — The Two Invisible Killers**: Chemical dew asphalt slick ($f = 0.70 \to 0.28$) and high-beam aerosol backscatter ($t_r = 1.5s \to 2.85s$). Stopping distance blows out from 98m to 216m while sight drops to 40m.
+4. **Slide 4 — The SafarGuard Innovation**: Fusing AASHTO kinematic physics with Google DeepMind Gemma 4 multimodal dashcam vision.
+5. **Slide 5 — 5 Multi-Stakeholder Views**: Public Corridor Monitor, Driver Careem Companion, Police & Rescue 1122 Console, Night HUD Cockpit, and Stopping Simulator.
+6. **Slide 6 — Dual Prize Alignment**:
+   - Google DeepMind: Best Use of Gemma 4 (multimodal dashcam vision).
+   - DigitalOcean: Best Open-Source AI Project (100% MIT, SKILL.md Agent Standard, 4 empirical datasets).
+7. **Slide 7 — Scale & Life-Saving Impact**: Protecting 1,200+ kilometers of Pakistan's high-speed transit corridors.
