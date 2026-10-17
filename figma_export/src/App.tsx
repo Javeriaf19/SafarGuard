@@ -3,8 +3,9 @@ import { maximumModelSpeed, stoppingDistance } from "./lib/safety"
 import SafetyOverlay from "./SafetyOverlay"
 import CorridorMap from "./CorridorMap"
 import GroundRealityPanel from "./GroundRealityPanel"
-import wetMotorwayImg from "./assets/wet-motorway.jpg"
-import smogHighwayImg from "./assets/smog-highway-reference.png"
+import { wetMotorwayBase64, smogHighwayBase64 } from "./assets/embeddedImages"
+const wetMotorwayImg = wetMotorwayBase64
+const smogHighwayImg = smogHighwayBase64
 
 const CommandConsole = lazy(() => import("./CommandConsole"))
 
