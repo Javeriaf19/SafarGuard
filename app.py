@@ -51,17 +51,24 @@ st.set_page_config(
 # Sidebar Configuration for API Key
 st.sidebar.markdown("### 🛡️ SafarGuard Settings")
 st.sidebar.markdown("**AI Vision Engine Configuration**")
+
+has_cloud_gemini = bool(os.environ.get("GEMINI_API_KEY"))
+has_cloud_groq = bool(os.environ.get("GROQ_API_KEY"))
+
 api_key_input = st.sidebar.text_input(
     "Google Gemini / Gemma 4 Key",
-    value=os.environ.get("GEMINI_API_KEY", ""),
+    value="",
+    placeholder="Active via Cloud Secrets" if has_cloud_gemini else "Paste Gemini API Key",
     type="password",
-    help="Paste your key from https://aistudio.google.com/ or add it to G:\\SafeGuard\\.env"
+    help="Key is securely stored in Streamlit Cloud Secrets. You can override it here with your own key if desired."
 )
 if api_key_input:
     os.environ["GEMINI_API_KEY"] = api_key_input
-    st.sidebar.success("Gemini API Active")
+    st.sidebar.success("Custom Gemini Key Active")
+elif has_cloud_gemini:
+    st.sidebar.success("Gemini API Active (Secured)")
 else:
-    st.sidebar.info("Tip: Set GEMINI_API_KEY in .env")
+    st.sidebar.info("Tip: Set GEMINI_API_KEY in Secrets")
 
 # Model Selection Support
 active_model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
@@ -79,12 +86,15 @@ os.environ["GEMINI_MODEL"] = selected_model
 # Groq Fallback Support
 groq_key_input = st.sidebar.text_input(
     "Groq Cloud Key (Fallback)",
-    value=os.environ.get("GROQ_API_KEY", ""),
+    value="",
+    placeholder="Active via Cloud Secrets" if has_cloud_groq else "Paste Groq API Key",
     type="password",
     help="Optional fallback from https://console.groq.com/"
 )
 if groq_key_input:
     os.environ["GROQ_API_KEY"] = groq_key_input
+elif has_cloud_groq:
+    st.sidebar.success("Groq Fallback Active (Secured)")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("**Active Prize Tracks:**")
