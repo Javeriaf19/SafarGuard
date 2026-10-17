@@ -35,8 +35,8 @@
 
 | Layer / Interface | Target Production Platform | Architecture & Scope | Target Access Link |
 | :--- | :--- | :--- | :--- |
-| **Driver & Public Web App** | **Vercel** (Edge Static CDN) | React 19, Leaflet Punjab Motorway Radar, Night HUD | [`https://safarguard.vercel.app`](https://github.com/Javeriaf19/SafarGuard) |
-| **Physics & AI Engine Core** | **Streamlit Community Cloud** | Python 3.12, AASHTO Solver, Gemma 4 Vision Pipeline | [`https://safarguard.streamlit.app`](https://github.com/Javeriaf19/SafarGuard) |
+| **Driver & Public Web App** | **Vercel** (Edge Static CDN) | React 19, Leaflet Punjab Motorway Radar, Night HUD | [`https://safar-guard.vercel.app`](https://safar-guard.vercel.app) |
+| **Physics & AI Engine Core** | **Streamlit Community Cloud** | Python 3.12, AASHTO Solver, Gemma 4 Vision Pipeline | [`https://safarguard.streamlit.app`](https://safarguard.streamlit.app) |
 
 </div>
 
