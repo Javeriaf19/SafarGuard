@@ -509,10 +509,10 @@ html(f"""
     <audio id="urduWarningAudio" src="data:audio/mp3;base64,{urdu_audio_b64}" preload="auto"></audio>
     <button onclick="
         var aud = document.getElementById('urduWarningAudio');
-        if (aud) {
+        if (aud) {{
             aud.currentTime = 0;
             aud.play();
-        }
+        }}
     " style="background: #2563EB; color: #FFF; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; transition: background 0.2s;">
         Play Urdu Audio
     </button>
