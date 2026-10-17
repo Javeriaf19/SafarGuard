@@ -243,7 +243,7 @@ html("""
     }
     .fog-image-wrapper {
         height: 260px;
-        background: #0D162B url('https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+        background: #0D162B url('https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
         position: relative;
         display: flex;
         align-items: flex-start;
@@ -506,10 +506,24 @@ html("""
         </div>
     </div>
     <button onclick="
-        var msg = new SpeechSynthesisUtterance('Khatra Shadeed Hai! Motorway par greasy chemical dew ki wajah se break nahi lagegi. Raftaar foran penty-saath par le aayein!');
-        msg.lang = 'hi-IN';
-        window.speechSynthesis.speak(msg);
-    " style="background: #2563EB; color: #FFF; border: none; padding: 8px 18px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer;">
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            var text = 'Khatra Shadeed Hai! Motorway par greasy chemical dew ki wajah se break nahi lagegi. Raftaar foran penty-saath par le aayein!';
+            var msg = new SpeechSynthesisUtterance(text);
+            var voices = window.speechSynthesis.getVoices();
+            var urduVoice = voices.find(function(v) { return v.lang && (v.lang.startsWith('ur') || v.lang.startsWith('hi')); });
+            if (urduVoice) {
+                msg.voice = urduVoice;
+                msg.lang = urduVoice.lang;
+            } else {
+                msg.lang = 'en-US';
+            }
+            msg.rate = 0.9;
+            window.speechSynthesis.speak(msg);
+        } else {
+            alert('Speech synthesis is not supported on this browser.');
+        }
+    " style="background: #2563EB; color: #FFF; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; transition: background 0.2s;">
         Play Urdu Audio
     </button>
 </div>
