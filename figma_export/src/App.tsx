@@ -92,21 +92,21 @@ function Header({
         <button
           type="button"
           onClick={() => onSelectView?.("nighthud")}
-          style={{ background: "transparent", border: "none", color: "inherit", font: "inherit", cursor: "pointer", padding: "0 8px" }}
+          style={{ background: "transparent", border: "none", color: "inherit", font: "inherit", fontSize: "12px", fontWeight: 600, cursor: "pointer", padding: "0", whiteSpace: "nowrap" }}
         >
           Night HUD
         </button>
         <button
           type="button"
           onClick={() => onSelectView?.("careem")}
-          style={{ background: "transparent", border: "none", color: "inherit", font: "inherit", cursor: "pointer", padding: "0 8px" }}
+          style={{ background: "transparent", border: "none", color: "inherit", font: "inherit", fontSize: "12px", fontWeight: 600, cursor: "pointer", padding: "0", whiteSpace: "nowrap" }}
         >
           Careem App HUD
         </button>
         <button
           type="button"
           onClick={() => onSelectView?.("police")}
-          style={{ background: "transparent", border: "none", color: "inherit", font: "inherit", cursor: "pointer", padding: "0 8px" }}
+          style={{ background: "transparent", border: "none", color: "inherit", font: "inherit", fontSize: "12px", fontWeight: 600, cursor: "pointer", padding: "0", whiteSpace: "nowrap" }}
         >
           Command Console
         </button>

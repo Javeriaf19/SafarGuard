@@ -54,8 +54,8 @@ button svg, a svg { flex-shrink: 0; }
 .brand > span { font-size: 25px; letter-spacing: -.9px; font-weight: 500; line-height: .9; }
 .brand-weight { font-weight: 800; }
 .brand small { display: block; margin-top: 8px; font: 500 7px var(--mono); letter-spacing: .2em; }
-.desktop-nav { display: flex; gap: 28px; margin-left: 20px; }
-.desktop-nav a { font-size: 12px; font-weight: 600; }
+.desktop-nav { display: flex; align-items: center; gap: 24px; margin-left: 20px; }
+.desktop-nav a, .desktop-nav button { font-size: 12px; font-weight: 600; line-height: 1; white-space: nowrap; font-family: var(--body); }
 .header-end { display: flex; align-items: center; gap: 27px; margin-left: auto; }
 .demo-status { display: flex; align-items: center; gap: 8px; color: var(--grey); font: 400 8px var(--mono); letter-spacing: .015em; white-space: nowrap; }
 .demo-status > span { width: 6px; height: 6px; background: var(--green); }
