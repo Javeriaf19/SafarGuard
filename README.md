@@ -10,11 +10,23 @@
 **Date**: October 17, 2026  
 **License**: MIT Open Source  
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![MLH: Hacktoberfest 2026](https://img.shields.io/badge/MLH-Hacktoberfest%202026-blue)](https://hacktoberfest.com/)
-[![Track: Google DeepMind](https://img.shields.io/badge/Google%20DeepMind-Gemma%204%20Multimodal-007A87)](https://deepmind.google/technologies/gemma/)
-[![Track: DigitalOcean](https://img.shields.io/badge/DigitalOcean-Best%20Open--Source%20AI-7E22CE)](https://www.digitalocean.com/)
-[![Agent Standard: SKILL.md](https://img.shields.io/badge/Agent%20Standard-SKILL.md-green)](SKILL.md)
+<p align="center">
+  <a href="https://github.com/Javeriaf19/SafarGuard"><img src="https://img.shields.io/badge/Status-Hackathon%20Ready-blue?style=for-the-badge" alt="Status" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-black?style=for-the-badge" alt="License: MIT" /></a>
+  <a href="https://deepmind.google/technologies/gemma/"><img src="https://img.shields.io/badge/AI%20Engine-Google%20DeepMind%20Gemma%204-007A87?style=for-the-badge" alt="AI Engine" /></a>
+  <a href="SKILL.md"><img src="https://img.shields.io/badge/Agent%20Standard-SKILL.md-22c55e?style=for-the-badge" alt="Agent Standard" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/Made%20in-Pakistan-01411C?style=for-the-badge" alt="Made in Pakistan" /></a>
+</p>
+
+<p align="center">
+  <a href="README.md"><strong>README</strong></a> |
+  <a href="SLIDES.md"><strong>SLIDES</strong></a> |
+  <a href="DATASETS.md"><strong>DATASETS</strong></a> |
+  <a href="CONTRIBUTING.md"><strong>CONTRIBUTING</strong></a> |
+  <a href="SECURITY.md"><strong>SECURITY</strong></a> |
+  <a href="CODE_OF_CONDUCT.md"><strong>CODE OF CONDUCT</strong></a> |
+  <a href="LICENSE"><strong>LICENSE</strong></a>
+</p>
 
 </div>
 
