@@ -401,8 +401,8 @@ export default function CorridorMap() {
                   }}
                   className={`px-3 py-1.5 text-xs font-mono rounded-lg transition-all ${
                     selectedPoint.id === pt.id
-                      ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
-                      : "bg-slate-900 text-slate-300 hover:text-white border border-slate-800"
+                      ? "bg-cyan-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30"
+                      : "bg-[#131d35] text-white hover:bg-slate-800 border border-slate-600 font-semibold"
                   }`}
                 >
                   {pt.shortLabel}
