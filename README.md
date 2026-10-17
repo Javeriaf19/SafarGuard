@@ -90,21 +90,13 @@ Prevailing consumer mobile applications categorize winter smog exclusively as an
 - **Chemical Dew Friction Collapse**: Cold overnight humidity mixes with suspended particulate matter ($PM_{2.5} > 400 \ \mu\text{g/m}^3$), generating an oily "chemical dew" layer on asphalt that drops tire friction coefficients from $f = 0.70$ down to **$f = 0.28$** (a greasy slick).
 - **High-Beam Aerosol Backscatter**: Headlights bounce off suspended carbon aerosols directly into driver retinas, destroying contrast sensitivity and expanding perception-reaction time ($t_r$) from $1.5s$ to **$2.85s$**.
 
-```mermaid
-flowchart TD
-    subgraph PROBLEM["The Winter Smog Collision Failure Cycle"]
-        AQI["Traditional AQI Apps<br>Report PM2.5 = 450 (Wear Mask)"] --> DRIVER["Driver Cruises at 100 km/h<br>Assumes Open Roadway"]
-        DRIVER --> HAZARDS["Invisible Physical Changes:<br>1. Chemical Dew: Friction f drops 0.70 to 0.28<br>2. Aerosol Backscatter: Reaction latency tr spikes 1.5s to 2.85s"]
-        HAZARDS --> CATASTROPHE["Stopping Distance blows out to 216m<br>Forward Visibility drops to 40m<br>Mass 176m Inevitable Crash Horizon"]
-    end
-
-    subgraph SOLUTION["The SafarGuard Autonomous Engine Intervention"]
-        VISION["Gemma 4 Multimodal Dashcam Vision<br>Audits glare, particulate extinction & unlit hazards"] --> PHYSICS["AASHTO Stopping Distance Core<br>Calculates CPI = SSD / Visibility = 5.40"]
-        PHYSICS --> INTERVENTION["Acoustic Roman Urdu Beacons + Night HUD<br>Dynamically enforces safe speed ceiling (34 km/h)<br>Collision Averted 400m in Advance"]
-    end
-
-    PROBLEM -.->|Fails to Prevent| SOLUTION
-```
+| Evaluation Dimension | Conventional Navigation & Weather Apps | SafarGuard Autonomous Prevention Engine |
+| :--- | :--- | :--- |
+| **Hazard Metric** | Ambient Air Quality ($PM_{2.5} > 400 \ \mu\text{g/m}^3$) | Mass-casualty kinetic stopping distance collision risk |
+| **Driver Advisory** | Passive health warnings ("Wear N95 mask") | Dynamic safe speed ceilings & urgent Roman Urdu audio beacons |
+| **Pavement Grip** | Assumes static dry friction ($f = 0.70$) | Detects chemical dew collapse down to $f = 0.28$ (greasy slick) |
+| **Visual Horizon** | None (assumes standard road sightline) | Gemma 4 audits backscatter glare, contrast loss & unlit obstacles |
+| **Stopping Horizon** | Blind 176m overshoot at 100 km/h ($SSD = 216\text{m} > 40\text{m}$) | Enforces 35 km/h quadratic safe speed ($SSD = 34\text{m} \le 40\text{m}$) |
 
 **SafarGuard** bridges this critical safety gap by fusing **AASHTO Stopping Sight Distance (SSD) vehicle dynamics** with **Google DeepMind's Gemma 4 multimodal vision engine**. Rather than relying on generic weather reports, SafarGuard continuously audits forward dashcam feeds, calculates the deterministic Crash Probability Index ($CPI$), solves for dynamic quadratic safe speed limits, and issues audible Roman Urdu tactical warnings before drivers outdrive their stopping horizon.
 
@@ -144,31 +136,11 @@ It is 10:45 PM on December 14. **Usman**, a 34-year-old software architect, is d
   <em>Figure 3: Usman's Blind Crash Horizon — An unlit sugarcane tractor-trolley stalled across lanes in dense smog near Sheikhupura, completely invisible until within 40 meters.</em>
 </p>
 
-```mermaid
-flowchart TD
-    subgraph NORMAL["1. Normal Clear Roadway (Dry Asphalt, 100 km/h)"]
-        N1["Visible Horizon: 250+ meters"]
-        N2["Total Stopping Distance: 98 meters"]
-        N3["Safety Buffer: +152 meters CLEAR"]
-        N1 --- N2 --- N3
-    end
-
-    subgraph SMOG["2. Winter Smog Fog Crash Zone (Sheikhupura M-2, 100 km/h)"]
-        S1["Visible Optical Horizon: 40 meters"]
-        S2["Total Stopping Distance: 216 meters (Greasy Slick f=0.28)"]
-        S3["BLIND CRASH ZONE: 176 METERS INEVITABLE IMPACT"]
-        S1 --- S2 --- S3
-    end
-
-    subgraph SAFARGUARD["3. SafarGuard Speed Ceiling Intervention (34 km/h)"]
-        SG1["Visible Optical Horizon: 40 meters"]
-        SG2["Controlled Stopping Distance: 34 meters"]
-        SG3["Safety Margin: +6 meters CONTROLLED STOP BEFORE HAZARD"]
-        SG1 --- SG2 --- SG3
-    end
-
-    NORMAL --> SMOG --> SAFARGUARD
-```
+| Scenario & Operating State | Cruising Speed | Friction ($f$) | Stopping Distance ($SSD$) | Visible Horizon | Crash Hazard Assessment |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **1. Normal Clear Roadway** | 100 km/h | 0.70 (Dry) | 98 meters | 250+ meters | **+152 meters CLEAR** (Safe deceleration zone) |
+| **2. Winter Smog Crash Zone** | 100 km/h | 0.28 (Slick) | 216 meters | 40 meters | **-176 METERS INEVITABLE CRASH** (Outdriving sightline) |
+| **3. SafarGuard Intervention** | 35 km/h | 0.28 (Slick) | 34 meters | 40 meters | **+6 METERS CONTROLLED STOP** (Safe halt before obstruction) |
 
 ### The SafarGuard Intervention
 SafarGuard operates in Usman's cabin via the smartphone mount:
@@ -467,27 +439,11 @@ SafarGuard was engineered specifically for **Hacktoberfest Hack Day Lahore 2026*
 ## 12. Repository Architecture & Directory Structure
 
 ```mermaid
-flowchart TD
-    ROOT["SafarGuard System Root"]
-
-    subgraph PRESENTATION["Presentation & Client Layer"]
-        FRONTEND["figma_export/ — React 19 Client Web Application<br>• App.tsx: Public Motorway Corridor Monitor<br>• SafetyOverlay.tsx: Careem Driver Mobile HUD<br>• CommandConsole.tsx: Police & Rescue 1122 Dispatch Console"]
-        ASSETS["assets/ & slides/<br>• Canonical Master Logo (PNG/SVG)<br>• Verified Crash Evidence Photos (Rescue 1122 / NHMP)<br>• Official Hackathon Pitch Deck & Slides PDF"]
-    end
-
-    subgraph ENGINE["Core Intelligence & Physics Engine"]
-        BACKEND["app.py — Python Physics & Vision Backend<br>• AASHTO Kinetic Stopping Sight Distance Equations<br>• Gemini / Gemma 4 Multimodal Dashcam Vision Core<br>• Dual Groq Cloud AI Low-Latency Fallback"]
-        DATA["data/ — Empirical Ground Truth Datasets<br>• 4 Verified Highway Smog & Crash Benchmark CSV Records<br>• Rescue 1122 Statistical Records & NHMP Closure Rules"]
-    end
-
-    subgraph STANDARDS["Open Standards, Docs & Governance"]
-        DOCS["docs/ — Engineering & Design Specifications<br>• PRD, TRD, System Architecture & Safety Protocols"]
-        GOV["Community & Open-Source Governance<br>• MIT License, Agent SKILL.md Open Standard<br>• Technical FAQs for Judges & Audience"]
-    end
-
-    ROOT --> PRESENTATION
-    PRESENTATION --> ENGINE
-    ENGINE --> STANDARDS
+flowchart LR
+    FRONTEND["React 19 Web App<br>(figma_export/)"] <-->|Telemetry & State| ENGINE["AASHTO Physics & Gemma 4<br>(app.py)"]
+    ENGINE <-->|Empirical Baselines| DATA["Crash Datasets<br>(data/)"]
+    ENGINE <-->|Agent Open Standard| DOCS["Autonomous Standard<br>(SKILL.md & docs/)"]
+    FRONTEND <-->|Media & Evidence| ASSETS["Branding & Deck<br>(assets/ & slides/)"]
 ```
 
 ### Complete Repository Directory Tree
