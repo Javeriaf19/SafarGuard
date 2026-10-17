@@ -15,6 +15,16 @@ from PIL import Image
 # ==============================================================================
 
 def load_local_env():
+    # 1. Check Streamlit Cloud Secrets
+    try:
+        if hasattr(st, "secrets"):
+            for k in ["GEMINI_API_KEY", "GROQ_API_KEY", "REACT_APP_URL"]:
+                if k in st.secrets and not os.environ.get(k):
+                    os.environ[k] = str(st.secrets[k]).strip()
+    except Exception:
+        pass
+
+    # 2. Check local .env
     env_path = os.path.join(os.path.dirname(__file__), ".env")
     if os.path.exists(env_path):
         with open(env_path, "r", encoding="utf-8") as f:
@@ -28,6 +38,8 @@ def load_local_env():
                         os.environ[k] = v
 
 load_local_env()
+
+react_app_url = os.environ.get("REACT_APP_URL", "https://safar-guard.vercel.app")
 
 st.set_page_config(
     page_title="SafarGuard | Don't Outdrive What You Can See",
@@ -406,7 +418,7 @@ html(f"""
         <a href="#corridors">Active Corridors</a>
         <a href="#calculator">Stopping Distance Math</a>
         <a href="#figma-live">Figma Design Canvas</a>
-        <a href="http://localhost:5173" target="_blank" class="btn-react-launch">⚡ Open 5-Screen React App ↗</a>
+        <a href="{react_app_url}" target="_blank" class="btn-react-launch">⚡ Open 5-Screen React App ↗</a>
     </div>
 
     <div>
@@ -555,7 +567,7 @@ html(corridors_html)
 # 5. LIVE FIGMA PROTOTYPE EMBED PLAYER
 # ==============================================================================
 
-html("""
+html(f"""
 <div id="figma-live" class="corridors-section">
     <div class="section-header-row">
         <div>
@@ -565,7 +577,7 @@ html("""
             <div class="section-h2">Live React Prototype Canvas</div>
         </div>
         <div style="display: flex; gap: 10px;">
-            <a href="http://localhost:5173" target="_blank" style="text-decoration: none;">
+            <a href="{react_app_url}" target="_blank" style="text-decoration: none;">
                 <button class="cta-btn-dark" style="padding: 8px 16px; font-size: 12px; background: #0891B2;">
                     ⚡ Open Dedicated App Tab ↗
                 </button>
@@ -580,8 +592,17 @@ html("""
 </div>
 """)
 
-# Embed the live running React Figma app locally
-st.components.v1.iframe("http://localhost:5173", height=780, scrolling=True)
+# Embed the live running React Figma app or display direct launch banner
+try:
+    query_params = getattr(st, "query_params", {})
+    is_embedded = query_params.get("embed") in ["true", True, "1"]
+except Exception:
+    is_embedded = False
+
+if not is_embedded:
+    st.components.v1.iframe(react_app_url, height=780, scrolling=True)
+else:
+    st.info("💡 You are currently exploring SafarGuard inside the unified Vercel dashboard.")
 
 # ==============================================================================
 # 6. STOPPING DISTANCE SIMULATOR & GEMMA 4 VISION (EXPANDABLE)
