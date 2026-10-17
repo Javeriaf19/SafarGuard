@@ -1,8 +1,8 @@
 @echo off
-title SafarGuard - Master PowerPoint Pitch Deck (7 Slides)
+title SafarGuard - Hackathon Presentation Pitch Deck
 echo ========================================================
 echo   SafarGuard: Don't Outdrive What You Can See
-echo   Opening 7-Slide Master Deck in Microsoft PowerPoint...
+echo   Opening Official Hackathon Pitch Deck...
 echo ========================================================
-start "" "%~dp0slides\SafarGuard_Master_Pitch_Deck.pptx"
+start "" "%~dp0slides\SafarGuard_Hackathon_Pitch.pptx"
 exit

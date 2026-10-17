@@ -26,25 +26,27 @@
 - [2. Real-Life Scenario: Usman Ki Raat Ka Safar (M-2 Motorway)](#2-real-life-scenario-usman-ki-raat-ka-safar-m-2-motorway)
 - [3. The Highway Smog Crisis: Physics and Empirical Evidence](#3-the-highway-smog-crisis-physics-and-empirical-evidence)
 - [4. Mathematical and Kinematic Formulation](#4-mathematical-and-kinematic-formulation)
-- [5. System Architecture](#5-system-architecture)
-- [6. Technical Implementation: Frontend and Backend](#6-technical-implementation-frontend-and-backend)
-  - [6.1 Frontend: High-Performance React Web Application](#61-frontend-high-performance-react-web-application)
-  - [6.2 Backend: Deterministic Physics Engine & Gemma 4 Vision Pipeline](#62-backend-deterministic-physics-engine--gemma-4-vision-pipeline)
-  - [6.3 Unified Architecture & Service Interconnection](#63-unified-architecture--service-interconnection)
-- [7. Research Datasets and Incident Benchmarks](#7-research-datasets-and-incident-benchmarks)
-- [8. API Configuration and Environment Setup](#8-api-configuration-and-environment-setup)
-- [9. MLH Hackathon Rules and Standard Compliance](#9-mlh-hackathon-rules-and-standard-compliance)
-- [10. Prize Category Alignments](#10-prize-category-alignments)
-  - [10.1 Best Use of Gemma 4 (Google DeepMind)](#101-best-use-of-gemma-4-google-deepmind)
-  - [10.2 Best Open-Source AI Project (DigitalOcean)](#102-best-open-source-ai-project-digitalocean)
-- [11. Repository Structure](#11-repository-structure)
-- [12. Pitch Deck and Presentation Assets](#12-pitch-deck-and-presentation-assets)
-- [13. Installation and Local Execution](#13-installation-and-local-execution)
-- [14. Security and Privacy](#14-security-and-privacy)
-- [15. Known Limitations](#15-known-limitations)
-- [16. Roadmap](#16-roadmap)
-- [17. License](#17-license)
-- [18. Creator and Lead Architect](#18-creator-and-lead-architect)
+- [5. Technology Stack and Agentic AI Tooling](#5-technology-stack-and-agentic-ai-tooling)
+- [6. System Architecture](#6-system-architecture)
+- [7. Technical Implementation: Frontend and Backend](#7-technical-implementation-frontend-and-backend)
+  - [7.1 Frontend: High-Performance React Web Application](#71-frontend-high-performance-react-web-application)
+  - [7.2 Backend: Deterministic Physics Engine & Gemma 4 Vision Pipeline](#72-backend-deterministic-physics-engine--gemma-4-vision-pipeline)
+  - [7.3 Unified Architecture & Service Interconnection](#73-unified-architecture--service-interconnection)
+- [8. Research Datasets and Incident Benchmarks](#8-research-datasets-and-incident-benchmarks)
+- [9. API Configuration and Environment Setup](#9-api-configuration-and-environment-setup)
+- [10. MLH Hackathon Rules and Standard Compliance](#10-mlh-hackathon-rules-and-standard-compliance)
+- [11. Prize Category Alignments](#11-prize-category-alignments)
+  - [11.1 Best Use of Gemma 4 (Google DeepMind)](#111-best-use-of-gemma-4-google-deepmind)
+  - [11.2 Best Open-Source AI Project (DigitalOcean)](#112-best-open-source-ai-project-digitalocean)
+- [12. Repository Architecture & Flowchart](#12-repository-architecture--flowchart)
+- [13. Open-Source Extensibility & Contribution Guide](#13-open-source-extensibility--contribution-guide)
+- [14. Pitch Deck and Presentation Assets](#14-pitch-deck-and-presentation-assets)
+- [15. Installation and Local Execution](#15-installation-and-local-execution)
+- [16. Security and Privacy](#16-security-and-privacy)
+- [17. Known Limitations](#17-known-limitations)
+- [18. Roadmap](#18-roadmap)
+- [19. License](#19-license)
+- [20. Creator and Lead Architect](#20-creator-and-lead-architect)
 
 ---
 
@@ -139,7 +141,31 @@ $$v_{\text{safe}} = \frac{-(2 g f t_r) + \sqrt{(2 g f t_r)^2 + 4 \cdot (2 g f \c
 
 ---
 
-## 5. System Architecture
+## 5. Technology Stack and Agentic AI Tooling
+
+SafarGuard was developed using advanced agentic AI coding tooling, high-performance web frameworks, and scientific computing libraries:
+
+| Layer / Domain | Technology & Tooling | Purpose & Operational Role |
+| :--- | :--- | :--- |
+| **Autonomous AI Coding Agents** | **Antigravity** (Google DeepMind) | Autonomous agentic coding assistant for pair programming, full-repo refactoring, background task automation, and file synthesis. |
+| **LLM Reasoning & Architecture** | **Google Gemini 3.8 Flash** & **Gemini 4 Argon** | Architectural planning, AASHTO mathematical validation, and PRD/TRD specification generation. |
+| **Local Model Runtime** | **Ollama** | Local LLM and vision model execution harness for edge computing and offline development. |
+| **Agentic Coding Harnesses** | **Claude Code** & **Cursor** | Autonomous CLI coding harness, multi-file editing, and codebase semantic indexing. |
+| **Computer Vision Engine** | **Google DeepMind Gemma 4** (`gemma-4-31b`) | Multimodal open-weight vision model auditing windshield dashcam feeds for aerosol backscatter and unlit obstacles. |
+| **Vision API Integration** | **Google GenAI SDK** (`google-genai`) | Official upstream client library for structured multimodal prompts, optical analysis, and inference streaming. |
+| **Frontend Framework** | **React 19** + **TypeScript** | High-performance reactive user interface with strict typing and concurrent rendering capabilities. |
+| **Build & Bundling Engine** | **Vite 6** | Ultra-fast bundling, instant Hot Module Replacement (HMR), and optimized production tree-shaking. |
+| **Styling & Design System** | **Tailwind CSS** | Custom zero-glare OLED night-mode color palette (`#050811`, `#0a1124`, cyan `#06b6d4`, amber `#f59e0b`, emergency red `#ef4444`). |
+| **Iconography & Visual Assets** | **Lucide React** | Lightweight, clean SVG vector iconography across all 5 stakeholder views. |
+| **Backend & Physics Core** | **Python 3.12** + **Streamlit** | Deterministic AASHTO physics engine, real-time quadratic safe-speed calculation, and interactive telemetry simulator. |
+| **Data Processing & Analytics** | **Pandas** & **NumPy** | Tabular processing, empirical friction degradation modeling, and Rescue 1122 crash log aggregation. |
+| **Agent Skill Open Standard** | **`SKILL.md` Specification** | Standardized tool descriptor allowing external autonomous AI agents to discover and invoke SafarGuard telemetry. |
+| **Version Control & CI/CD** | **Git** & **GitHub CLI (`gh`)** | Automated repository version control, branch management, and GitHub synchronization. |
+| **Production Deployment Targets** | **Vercel** (Frontend) + **Railway** (Backend) | Cloud edge deployment architecture for decoupled frontend static hosting and backend Python microservices. |
+
+---
+
+## 6. System Architecture
 
 ```mermaid
 flowchart TD
@@ -180,11 +206,11 @@ flowchart TD
 
 ---
 
-## 6. Technical Implementation: Frontend and Backend
+## 7. Technical Implementation: Frontend and Backend
 
 SafarGuard is decoupled into a modular, production-ready full-stack architecture:
 
-### 6.1 Frontend: High-Performance React Web Application
+### 7.1 Frontend: High-Performance React Web Application
 Located in [`figma_export/`](figma_export/), the frontend is engineered using modern web technologies:
 - **Core Framework**: React 19 with TypeScript, bundled with Vite for near-instant hot module replacement and production tree-shaking.
 - **Styling Architecture**: Tailwind CSS with customized dark OLED palettes (`#050811`, `#0a1124`, cyan `#06b6d4`, amber `#f59e0b`, emergency red `#ef4444`).
@@ -196,21 +222,21 @@ Located in [`figma_export/`](figma_export/), the frontend is engineered using mo
   4. `NightHUD`: Minimalist black-background cockpit gauge with animated speed ceiling arc and synthesized audio warnings.
   5. `StoppingSimulator`: Interactive SVG rendering comparing human perception, vehicle braking distance, and optical line-of-sight.
 
-### 6.2 Backend: Deterministic Physics Engine & Gemma 4 Vision Pipeline
+### 7.2 Backend: Deterministic Physics Engine & Gemma 4 Vision Pipeline
 Located in [`app.py`](app.py), the backend provides high-performance simulation and AI auditing:
 - **Runtime Environment**: Python 3.12 with Streamlit application framework for rapid real-time telemetry rendering.
 - **Physics Computations**: Deterministic implementation of AASHTO stopping distance formulas, friction degradation curves, and quadratic safe speed ceilings.
 - **Google DeepMind Gemma 4 Vision Integration**: Leverages the official Google GenAI SDK to send windshield imagery to `gemma-4-31b` or `gemini-2.5-flash` for optical density classification, high-beam backscatter detection, and unlit obstacle localization.
 - **Telemetry Endpoints**: RESTful JSON serialization enabling external connected-car applications and highway overhead digital signs (VMS) to consume corridor speed recommendations.
 
-### 6.3 Unified Architecture & Service Interconnection
+### 7.3 Unified Architecture & Service Interconnection
 The frontend and backend communicate seamlessly:
 - **Development**: The React web client runs on `http://localhost:5173` while the Python simulation engine runs on `http://localhost:8501`.
 - **Production Architecture**: The frontend compiles to static optimized assets deployed on **Vercel**, while the backend Python engine deploys on **Railway** or **Google Cloud Run**. The frontend consumes live telemetry via REST API calls and server-sent events, providing a unified single-URL experience for judges and end users.
 
 ---
 
-## 7. Research Datasets and Incident Benchmarks
+## 8. Research Datasets and Incident Benchmarks
 
 All modeling in SafarGuard is backed by empirical research datasets stored in the [`data/`](data/) directory:
 
@@ -223,7 +249,7 @@ All modeling in SafarGuard is backed by empirical research datasets stored in th
 
 ---
 
-## 8. API Configuration and Environment Setup
+## 9. API Configuration and Environment Setup
 
 SafarGuard requires a Google Gemini / Gemma 4 API key for multimodal vision inference.
 
@@ -250,7 +276,7 @@ If no API key is provided, SafarGuard automatically falls back to its internal d
 
 ---
 
-## 9. MLH Hackathon Rules and Standard Compliance
+## 10. MLH Hackathon Rules and Standard Compliance
 
 SafarGuard was engineered specifically for **Hacktoberfest Hack Day Lahore 2026** in strict compliance with all Major League Hacking guidelines:
 
@@ -262,15 +288,15 @@ SafarGuard was engineered specifically for **Hacktoberfest Hack Day Lahore 2026*
 
 ---
 
-## 10. Prize Category Alignments
+## 11. Prize Category Alignments
 
-### 10.1 Best Use of Gemma 4 (Google DeepMind)
+### 11.1 Best Use of Gemma 4 (Google DeepMind)
 - **Challenge**: Deliver a multimodal, lightweight, open AI assistant that understands more of what users share.
 - **SafarGuard Implementation**: Integrates Google DeepMind's Gemma 4 multimodal model to audit forward windshield dashcam streams under extreme winter smog. Gemma 4 analyzes low-contrast visual feeds, quantifies high-beam aerosol backscatter glare, isolates unlit highway hazards (such as broken-down freight trucks and agricultural trolleys), and returns structured JSON confidence vectors directly into the AASHTO physics core.
 - **Sponsor Usage Answer**:
   > SafarGuard utilizes Google DeepMind's Gemma 4 multimodal open-weight vision model to inspect windshield dashcam feeds under dense winter smog. Gemma 4 classifies aerosol backscatter glare, detects unlit stationary obstacles, and estimates optical visibility distance, piping real-time telemetry into our AASHTO stopping sight distance physics engine.
 
-### 10.2 Best Open-Source AI Project (DigitalOcean)
+### 11.2 Best Open-Source AI Project (DigitalOcean)
 - **Challenge**: Build an original project that uses open-source or open-weight AI as an important part of how it works, published under an open-source license with agent skill standard compliance.
 - **SafarGuard Implementation**: Published 100% open-source under the MIT License with a compliant `SKILL.md` agent harness. Integrates open-weight Gemma 4 models alongside empirical highway emergency benchmark datasets.
 - **Sponsor Usage Answer**:
@@ -278,79 +304,108 @@ SafarGuard was engineered specifically for **Hacktoberfest Hack Day Lahore 2026*
 
 ---
 
-## 11. Repository Structure
+## 12. Repository Architecture & Flowchart
 
-```
-SafarGuard/
-├── .env.example                                # Template for API credentials
-├── .gitignore                                  # Git exclusion rules
-├── LICENSE                                     # MIT Open-Source License
-├── README.md                                   # Comprehensive engineering documentation
-├── requirements.txt                            # Python runtime dependencies
-├── SKILL.md                                    # Agent Skill Open Standard specification
-├── app.py                                      # Python Streamlit physics dashboard & Gemma 4 engine
-├── generate_pptx.py                            # Automated PowerPoint deck generator
-├── open_powerpoint_deck.bat                    # One-click PowerPoint launcher
-├── open_presentation_slides.bat                # One-click presentation launcher
-├── run_figma_web_app.bat                       # One-click React web launcher
-├── run_streamlit_app.bat                       # One-click Streamlit launcher
-│
-├── assets/                                     # Official project branding
-│   ├── safarguard_master_logo.png              # Primary master logo (PNG)
-│   └── safarguard_master_logo.svg              # Primary vector logo (SVG)
-│
-├── data/                                       # Empirical research datasets
-│   ├── huggingface_fog_vision_benchmarks.csv
-│   ├── lahore_smog_accident_benchmarks_2024_2026.csv
-│   ├── nhmp_motorway_closure_criteria.csv
-│   └── punjab_rescue_1122_smog_corridor_stats.csv
-│
-├── docs/                                       # Institutional engineering specifications
-│   ├── 01_PRD.md                               # Product Requirements Document
-│   ├── 02_TRD.md                               # Technical Requirements Document
-│   ├── 03_UI_UX_DESIGN_BRIEF.md                # Design System Guidelines
-│   ├── 04_APP_FLOW_AND_STATE_MACHINE.md        # State Machine Architecture
-│   ├── 05_BACKEND_SCHEMA_AND_API_CONTRACTS.md  # API Specs & Data Contracts
-│   ├── 06_IMPLEMENTATION_PLAN.md               # Execution Milestones
-│   ├── 07_SYSTEM_ARCHITECTURE.md               # System Topology Diagram
-│   ├── 08_RULES_AND_COMPLIANCE.md              # MLH & Hackathon Rule Verification
-│   ├── 09_DATABASE_INDEXING_CACHING_LOAD_TEST.md # Performance Benchmarking
-│   ├── 10_SEO_AND_PRODUCTION_CHECKLIST.md      # Production Deployment Readiness
-│   ├── 11_PRIVACY_POLICY.md                    # Data Privacy Guidelines
-│   ├── 12_TERMS_OF_SERVICE.md                  # Terms of Service
-│   ├── 13_RESEARCH_AND_DATA_CITATIONS.md       # Government & Academic Citations
-│   └── FIGMA_DESIGN_SYSTEM_AND_SCREENS.md      # UI Component Catalog
-│
-├── figma_export/                               # React 19 / TypeScript / Vite web application
-│   ├── package.json                            # Node dependencies and scripts
-│   ├── vite.config.ts                          # Vite build configuration
-│   ├── index.html                              # Web app entry HTML
-│   ├── src/                                    # React components and styling
-│   │   ├── App.tsx                             # Main router and shell
-│   │   ├── main.tsx                            # Root application entry
-│   │   ├── SafetyOverlay.tsx                   # In-Ride driver companion
-│   │   └── CommandConsole.tsx                  # Police & Rescue 1122 console
-│   └── public/                                 # Static web assets
-│
-└── slides/                                     # Pitch deck and presentation materials
-    ├── index.html                              # Interactive 7-slide web presentation
-    ├── SafarGuard_Master_Pitch_Deck.pptx       # 16:9 Widescreen PowerPoint presentation
-    ├── SPEAKER_SCRIPT.md                       # Rehearsal notes and speech script
-    └── images/                                 # Slide visual assets
+```mermaid
+flowchart TD
+    ROOT["SafarGuard Root Directory"]
+
+    subgraph CONFIG["Root Configuration & Tooling"]
+        ENV[".env.example<br>API Credentials Template"]
+        GIT[".gitignore<br>Excludes node_modules & cache"]
+        LIC["LICENSE<br>MIT Open-Source"]
+        README["README.md<br>Master Engineering Docs"]
+        SKILL["SKILL.md<br>Agent Skill Open Standard"]
+        PY_APP["app.py<br>Streamlit Physics & Vision Backend"]
+        REQ["requirements.txt<br>Python Dependencies"]
+    end
+
+    subgraph ASSETS["assets/ — Official Branding"]
+        PNG["safarguard_master_logo.png<br>Master Canonical Logo"]
+        SVG["safarguard_master_logo.svg<br>Vector Master Logo"]
+    end
+
+    subgraph DATA["data/ — Empirical Research Datasets"]
+        D1["lahore_smog_accident_benchmarks_2024_2026.csv"]
+        D2["nhmp_motorway_closure_criteria.csv"]
+        D3["punjab_rescue_1122_smog_corridor_stats.csv"]
+        D4["huggingface_fog_vision_benchmarks.csv"]
+    end
+
+    subgraph DOCS["docs/ — Engineering & Design Specifications"]
+        PRD["01_PRD.md & 02_TRD.md"]
+        UI_BRIEF["03_UI_UX_DESIGN_BRIEF.md"]
+        STATE["04_APP_FLOW_AND_STATE_MACHINE.md"]
+        SCHEMA["05_BACKEND_SCHEMA_AND_API_CONTRACTS.md"]
+        ARCH["07_SYSTEM_ARCHITECTURE.md"]
+        RULES["08_RULES_AND_COMPLIANCE.md"]
+        CITATIONS["13_RESEARCH_AND_DATA_CITATIONS.md"]
+        FIGMA_DOC["FIGMA_DESIGN_SYSTEM_AND_SCREENS.md"]
+    end
+
+    subgraph FRONTEND["figma_export/ — React 19 Web Application"]
+        F_SRC["src/"]
+        F_APP["App.tsx<br>Public Corridor Monitor & Shell"]
+        F_SAFETY["SafetyOverlay.tsx<br>Careem Driver Mobile HUD"]
+        F_CONSOLE["CommandConsole.tsx<br>Police & Rescue 1122 Desk"]
+        F_DIST["dist/<br>Compiled Production Assets"]
+        F_PUB["public/<br>Static Favicons & Datasets"]
+    end
+
+    subgraph SLIDES["slides/ — Official Pitch Deck Assets"]
+        DECK_PPTX["SafarGuard_Hackathon_Pitch.pptx<br>Official Presentation Deck"]
+        DECK_HTML["index.html<br>Interactive 7-Slide Web Deck"]
+        DECK_BAT["open_powerpoint_deck.bat<br>One-Click PPTX Launcher"]
+    end
+
+    ROOT --> CONFIG
+    ROOT --> ASSETS
+    ROOT --> DATA
+    ROOT --> DOCS
+    ROOT --> FRONTEND
+    ROOT --> SLIDES
 ```
 
 ---
 
-## 12. Pitch Deck and Presentation Assets
+## 13. Open-Source Extensibility & Contribution Guide
+
+SafarGuard is deliberately architected as a modular, extensible open-source platform. We welcome contributions across multiple disciplines:
+
+### 1. Regional Corridors & Telemetry Datasets
+- **Add New Highway Corridors**: Introduce route nodes and micro-climate definitions for Sindh (M-9 Karachi-Hyderabad, N-55 Indus Highway), Khyber Pakhtunkhwa (M-1 Peshawar-Islamabad, Swat Expressway), and Balochistan (N-25 National Highway).
+- **Contribute Meteorological Feeds**: Expand [`data/`](data/) with local particulate matter ($PM_{2.5}, PM_{10}$) and relative humidity sensor time-series to refine chemical dew friction curves.
+- **Rescue & Police Incident Benchmarks**: Add authenticated accident logs from provincial emergency services (Rescue 1122, Sindh Integrated Emergency Health Services).
+
+### 2. UI/UX Design & Localized Driver Interfaces
+- **New Stakeholder Views**: Design specialized interfaces for freight dispatchers, inter-city bus operators, and agricultural machinery drivers.
+- **Bilingual & Regional Voice Beacons**: Implement synthesized audio alert strings in regional languages (Sindhi, Pashto, Balochi, Punjabi, and standardized Urdu) to maximize comprehension across diverse driver demographics.
+- **Accessible HUD Themes**: Build ultra-high-contrast and color-blind optimized visual radar dials for the `/night-hud` interface.
+
+### 3. Computer Vision & Local Model Harnesses
+- **Local Edge Inference Harnesses**: Extend [`app.py`](app.py) with **Ollama**, **llama.cpp**, or **ONNX Runtime** integrations to run quantized vision models (`gemma-4-2b-it-q4`, `qwen2.5-vl`) entirely on-device without cloud connectivity.
+- **Aerosol Backscatter Detection Algorithms**: Contribute improved optical transmission algorithms modeling Mie scattering under sodium-vapor and LED street lighting.
+- **Synthetic Fog Augmentation**: Add automated image degradation pipelines (fog, rain, greasy windshield smear) for benchmarking dashcam robustness.
+
+### 4. Vehicle Telematics & CAN Bus Hardware
+- **OBD-II Bluetooth Bridges**: Write client adapters to capture real-time wheel speed ($v$), anti-lock braking system (ABS) triggers, and windshield wiper motor speeds via standard ELM327 Bluetooth dongles.
+- **Mobile Sensor Telemetry**: Leverage smartphone accelerometers and gyroscopes to detect emergency braking and hydroplaning events in real time.
+
+### 5. Municipal & Emergency Infrastructure
+- **Highway Variable Message Sign (VMS) Webhooks**: Implement automated dispatch protocols to push safe speed ceilings directly to overhead digital motorway signage at toll plazas.
+- **Automated SOS Beacons**: Create secure webhook listeners routing critical collision probability alerts to the nearest NHMP patrol car or Rescue 1122 station.
+
+---
+
+## 14. Pitch Deck and Presentation Assets
 
 SafarGuard includes a complete set of presentation assets ready for judging:
+- **Official Presentation Deck**: Access [`slides/SafarGuard_Hackathon_Pitch.pptx`](slides/SafarGuard_Hackathon_Pitch.pptx) or double-click [`open_powerpoint_deck.bat`](open_powerpoint_deck.bat) to launch the widescreen PowerPoint pitch deck.
 - **Interactive Web Pitch Deck**: Launch [`slides/index.html`](slides/index.html) in any browser or double-click [`open_presentation_slides.bat`](open_presentation_slides.bat) for full keyboard-navigated widescreen slides.
-- **PowerPoint Deck**: Access [`slides/SafarGuard_Master_Pitch_Deck.pptx`](slides/SafarGuard_Master_Pitch_Deck.pptx) or double-click [`open_powerpoint_deck.bat`](open_powerpoint_deck.bat).
-- **Speaker Rehearsal Script**: Review [`slides/SPEAKER_SCRIPT.md`](slides/SPEAKER_SCRIPT.md) for 3-minute and 5-minute timed judging pitches.
 
 ---
 
-## 13. Installation and Local Execution
+## 15. Installation and Local Execution
 
 ### Prerequisites
 - Node.js 18+ (for React web application)
@@ -382,7 +437,7 @@ The dashboard will open at `http://localhost:8501`.
 
 ---
 
-## 14. Security and Privacy
+## 16. Security and Privacy
 
 - **Client-Side Privacy First**: SafarGuard's public web monitor runs client-side telemetry calculations without saving driver identity, passenger records, or route histories to an external tracking database.
 - **API Credential Safeguard**: The Google Gemini API key is isolated strictly in environment variables (`.env`) and never exposed in public client bundles.
@@ -390,14 +445,14 @@ The dashboard will open at `http://localhost:8501`.
 
 ---
 
-## 15. Known Limitations
+## 17. Known Limitations
 
 - **Dashcam Optical Penetration**: In zero-visibility black fog conditions (visibility < 5 meters), passive optical dashcams cannot detect obstacles beyond the immediate bumper zone without forward millimeter-wave radar.
 - **Sensor Calibration**: Tire friction models assume standard radial passenger car tires on asphalt. Worn treads, heavy commercial axles, or mud-caked roadbeds require custom friction offset parameters.
 
 ---
 
-## 16. Roadmap
+## 18. Roadmap
 
 - [ ] **v1.1 — Direct OBD-II CAN Bus Telemetry**: Read live wheel speed, ABS brake status, and wiper activation via Bluetooth OBD-II dongles.
 - [ ] **v1.2 — NHMP Toll Plaza Integration**: Direct API bridge to National Highway Authority digital overhead Variable Message Signs (VMS).
@@ -406,13 +461,13 @@ The dashboard will open at `http://localhost:8501`.
 
 ---
 
-## 17. License
+## 19. License
 
 This project is licensed under the **MIT License** — see the [`LICENSE`](LICENSE) file for details.
 
 ---
 
-## 18. Creator and Lead Architect
+## 20. Creator and Lead Architect
 
 **Javeria Farhan** — Solo Creator, Product Architect & Developer
 - **Core Focus**: Product Architecture, AASHTO Kinematic Physics Modeling, Gemma 4 Multimodal Integration, React 19 UI Engineering, Rescue 1122 Empirical Dataset Analysis.
