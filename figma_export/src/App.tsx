@@ -78,6 +78,7 @@ function Header({ legal = false }: { legal?: boolean }) {
       <nav className="desktop-nav" aria-label="Primary navigation">
         <a href="/#corridors">Corridors</a>
         <a href="/#simulator">Simulator</a>
+        <a href="/#ai-engine">AI Physics Core</a>
         <a href="/#methodology">The Science</a>
         <a href="/night-hud">Night HUD</a>
         <a href="/safety-overlay">Careem App HUD</a>
@@ -87,8 +88,28 @@ function Header({ legal = false }: { legal?: boolean }) {
         <span className="demo-status">
           <span /> DEMO ENVIRONMENT
         </span>
+        <a
+          className="header-cta"
+          href="https://safarguard.streamlit.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Open Streamlit Python Engine in New Tab"
+          style={{
+            background: "linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)",
+            color: "#ffffff",
+            fontWeight: 700,
+            border: "none",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.4rem",
+            padding: "0.45rem 0.85rem",
+            borderRadius: "6px"
+          }}
+        >
+          <span>⚡ AI Physics Core ↗</span>
+        </a>
         <a className="header-cta" href={legal ? "/" : "#corridors"}>
-          {legal ? "Back to overview" : "Explore the data"}
+          {legal ? "Back to overview" : "Explore"}
           <Arrow />
         </a>
       </div>
@@ -117,6 +138,9 @@ function Footer() {
         <div>
           <a href="/data/corridors.json" download>
             Demo dataset <Arrow diagonal />
+          </a>
+          <a href="https://safarguard.streamlit.app" target="_blank" rel="noopener noreferrer">
+            Live Streamlit AI Core <Arrow diagonal />
           </a>
           <a href="/terms">Terms of service</a>
           <a href="/privacy">Privacy policy</a>
@@ -915,6 +939,71 @@ function Dashboard() {
           </div>
         </section>
 
+        {/* Section 03: Live Streamlit AI Physics Core Embed (Method 2 Integration) */}
+        <section
+          className="section-shell"
+          id="ai-engine"
+          aria-labelledby="ai-engine-title"
+          style={{ marginTop: "4rem", marginBottom: "4rem" }}
+        >
+          <div className="section-heading mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <p className="eyebrow" style={{ color: "#06b6d4" }}>
+                03 / LIVE CLOUD PYTHON ENGINE (STREAMLIT COMMUNITY CLOUD)
+              </p>
+              <h2 id="ai-engine-title" style={{ fontSize: "1.75rem", fontWeight: 700, margin: "0.5rem 0" }}>
+                AASHTO Stopping Kinematics & DeepMind Gemma 4 Vision
+              </h2>
+              <p style={{ color: "#94a3b8", fontSize: "0.875rem", maxWidth: "48rem" }}>
+                Directly interact with the cloud-hosted Python Streamlit engine below, running live telemetry feeds, real-time Open-Meteo atmospheric readings, and AASHTO hazard forecasting without leaving this portal.
+              </p>
+            </div>
+            <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+              <a
+                href="https://safarguard.streamlit.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="header-cta"
+                style={{
+                  background: "#0891b2",
+                  color: "#ffffff",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "0.5rem",
+                  fontWeight: 600,
+                  fontSize: "0.8rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  textDecoration: "none"
+                }}
+              >
+                <span>Launch in Full Screen ↗</span>
+              </a>
+            </div>
+          </div>
+          <div
+            style={{
+              width: "100%",
+              background: "#050811",
+              border: "1px solid #1e293b",
+              borderRadius: "1rem",
+              overflow: "hidden",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
+            }}
+          >
+            <iframe
+              src="https://safarguard.streamlit.app/?embed=true"
+              style={{
+                width: "100%",
+                minHeight: "850px",
+                border: "none"
+              }}
+              title="SafarGuard Live Streamlit AI & Physics Core"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
         <section
           className="research-section section-shell"
           id="methodology"
@@ -932,7 +1021,7 @@ function Dashboard() {
             </div>
           </div>
           <div className="research-copy">
-            <p className="eyebrow">03 / THE SCIENCE BEHIND THE SIGNAL</p>
+            <p className="eyebrow">04 / THE SCIENCE BEHIND THE SIGNAL</p>
             <h2 id="research-title">
               FOG HIDES THE HAZARD.
               <br />

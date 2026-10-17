@@ -27,3 +27,4 @@ ENV/
 Thumbs.db
 .vscode/
 .idea/
+*.mp4
