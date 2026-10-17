@@ -1,6 +1,9 @@
 <div align="center">
 
 <img src="assets/safarguard_master_logo.png" alt="SafarGuard Highway Intelligence" width="460" />
+<br/><br/>
+<img src="assets/evidence/highway_smog_pileup_hero.png" alt="Massive winter smog highway collision on Punjab Motorway" width="850" />
+<br/>
 
 # SafarGuard
 ### Autonomous Smog Collision Prevention Engine for Punjab Highways
@@ -87,6 +90,22 @@ Prevailing consumer mobile applications categorize winter smog exclusively as an
 - **Chemical Dew Friction Collapse**: Cold overnight humidity mixes with suspended particulate matter ($PM_{2.5} > 400 \ \mu\text{g/m}^3$), generating an oily "chemical dew" layer on asphalt that drops tire friction coefficients from $f = 0.70$ down to **$f = 0.28$** (a greasy slick).
 - **High-Beam Aerosol Backscatter**: Headlights bounce off suspended carbon aerosols directly into driver retinas, destroying contrast sensitivity and expanding perception-reaction time ($t_r$) from $1.5s$ to **$2.85s$**.
 
+```mermaid
+flowchart TD
+    subgraph PROBLEM["The Winter Smog Collision Failure Cycle"]
+        AQI["Traditional AQI Apps<br>Report PM2.5 = 450 (Wear Mask)"] --> DRIVER["Driver Cruises at 100 km/h<br>Assumes Open Roadway"]
+        DRIVER --> HAZARDS["Invisible Physical Changes:<br>1. Chemical Dew: Friction f drops 0.70 to 0.28<br>2. Aerosol Backscatter: Reaction latency tr spikes 1.5s to 2.85s"]
+        HAZARDS --> CATASTROPHE["Stopping Distance blows out to 216m<br>Forward Visibility drops to 40m<br>Mass 176m Inevitable Crash Horizon"]
+    end
+
+    subgraph SOLUTION["The SafarGuard Autonomous Engine Intervention"]
+        VISION["Gemma 4 Multimodal Dashcam Vision<br>Audits glare, particulate extinction & unlit hazards"] --> PHYSICS["AASHTO Stopping Distance Core<br>Calculates CPI = SSD / Visibility = 5.40"]
+        PHYSICS --> INTERVENTION["Acoustic Roman Urdu Beacons + Night HUD<br>Dynamically enforces safe speed ceiling (34 km/h)<br>Collision Averted 400m in Advance"]
+    end
+
+    PROBLEM -.->|Fails to Prevent| SOLUTION
+```
+
 **SafarGuard** bridges this critical safety gap by fusing **AASHTO Stopping Sight Distance (SSD) vehicle dynamics** with **Google DeepMind's Gemma 4 multimodal vision engine**. Rather than relying on generic weather reports, SafarGuard continuously audits forward dashcam feeds, calculates the deterministic Crash Probability Index ($CPI$), solves for dynamic quadratic safe speed limits, and issues audible Roman Urdu tactical warnings before drivers outdrive their stopping horizon.
 
 ---
@@ -117,6 +136,32 @@ It is 10:45 PM on December 14. **Usman**, a 34-year-old software architect, is d
    - On this smog-dew slick, his vehicle now requires **216 meters** to stop.
    - However, visible optical penetration through the windshield is only **40 meters**.
    - **Usman is outdriving his visible horizon by 176 meters.** A stationary unlit tractor-trolley or stalled bus 50 meters ahead is mathematically unavoidable.
+
+```mermaid
+flowchart TD
+    subgraph NORMAL["1. Normal Clear Roadway (Dry Asphalt, 100 km/h)"]
+        N1["Visible Horizon: 250+ meters"]
+        N2["Total Stopping Distance: 98 meters"]
+        N3["Safety Buffer: +152 meters CLEAR"]
+        N1 --- N2 --- N3
+    end
+
+    subgraph SMOG["2. Winter Smog Fog Crash Zone (Sheikhupura M-2, 100 km/h)"]
+        S1["Visible Optical Horizon: 40 meters"]
+        S2["Total Stopping Distance: 216 meters (Greasy Slick f=0.28)"]
+        S3["BLIND CRASH ZONE: 176 METERS INEVITABLE IMPACT"]
+        S1 --- S2 --- S3
+    end
+
+    subgraph SAFARGUARD["3. SafarGuard Speed Ceiling Intervention (34 km/h)"]
+        SG1["Visible Optical Horizon: 40 meters"]
+        SG2["Controlled Stopping Distance: 34 meters"]
+        SG3["Safety Margin: +6 meters CONTROLLED STOP BEFORE HAZARD"]
+        SG1 --- SG2 --- SG3
+    end
+
+    NORMAL --> SMOG --> SAFARGUARD
+```
 
 ### The SafarGuard Intervention
 SafarGuard operates in Usman's cabin via the smartphone mount:
