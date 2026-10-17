@@ -121,13 +121,15 @@ export default function CorridorMap() {
     })
     mapInstanceRef.current = map
 
-    // CartoDB Dark Matter tiles (100% free, no API key, zero cookies/tracking)
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank">CARTO</a>',
-      subdomains: "abcd",
-      maxZoom: 18,
-    }).addTo(map)
+    // ESRI World Dark Gray Canvas tiles (100% free, zero watermark, no API key required)
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      {
+        attribution:
+          '&copy; <a href="https://www.esri.com/" target="_blank">Esri</a> &mdash; Punjab Highway Safety Radar',
+        maxZoom: 16,
+      }
+    ).addTo(map)
 
     // Highway Corridor Polylines (M-2, M-11)
     const m2Coordinates: [number, number][] = [
