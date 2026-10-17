@@ -73,18 +73,42 @@ function Brand({ footer = false }: { footer?: boolean }) {
   )
 }
 
-function Header({ legal = false }: { legal?: boolean }) {
+function Header({
+  legal = false,
+  onSelectView,
+}: {
+  legal?: boolean
+  onSelectView?: (view: "overview" | "nighthud" | "careem" | "police") => void
+}) {
   return (
     <header className="site-header">
       <Brand />
       <nav className="desktop-nav" aria-label="Primary navigation">
-        <a href="/#corridors">Corridors</a>
-        <a href="/#simulator">Simulator</a>
-        <a href="/#ai-engine">AI Physics Core</a>
-        <a href="/#methodology">The Science</a>
-        <a href="/night-hud">Night HUD</a>
-        <a href="/safety-overlay">Careem App HUD</a>
-        <a href="/command-console">Command Console</a>
+        <a href="/#corridors" onClick={() => onSelectView?.("overview")}>Corridors</a>
+        <a href="/#simulator" onClick={() => onSelectView?.("overview")}>Simulator</a>
+        <a href="/#ai-engine" onClick={() => onSelectView?.("overview")}>AI Physics Core</a>
+        <a href="/#methodology" onClick={() => onSelectView?.("overview")}>The Science</a>
+        <button
+          type="button"
+          onClick={() => onSelectView?.("nighthud")}
+          style={{ background: "transparent", border: "none", color: "inherit", font: "inherit", cursor: "pointer", padding: "0 8px" }}
+        >
+          Night HUD
+        </button>
+        <button
+          type="button"
+          onClick={() => onSelectView?.("careem")}
+          style={{ background: "transparent", border: "none", color: "inherit", font: "inherit", cursor: "pointer", padding: "0 8px" }}
+        >
+          Careem App HUD
+        </button>
+        <button
+          type="button"
+          onClick={() => onSelectView?.("police")}
+          style={{ background: "transparent", border: "none", color: "inherit", font: "inherit", cursor: "pointer", padding: "0 8px" }}
+        >
+          Command Console
+        </button>
       </nav>
       <div className="header-end">
         <span className="demo-status">
@@ -110,7 +134,7 @@ function Header({ legal = false }: { legal?: boolean }) {
         >
           <span>⚡ AI Physics Core ↗</span>
         </a>
-        <a className="header-cta" href={legal ? "/" : "#corridors"}>
+        <a className="header-cta" href={legal ? "/" : "#corridors"} onClick={() => onSelectView?.("overview")}>
           {legal ? "Back to overview" : "Explore"}
           <Arrow />
         </a>
@@ -343,6 +367,7 @@ function App() {
 }
 
 function Dashboard() {
+  const [activeView, setActiveView] = useState<"overview" | "nighthud" | "careem" | "police">("overview")
   const [corridors, setCorridors] = useState<Corridor[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
@@ -443,7 +468,52 @@ function Dashboard() {
           <Arrow diagonal />
         </a>
       </div>
-      <Header />
+      <Header onSelectView={setActiveView} />
+      {activeView === "nighthud" && (
+        <div style={{ position: "relative" }}>
+          <div style={{ background: "#0b1220", padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+            <span style={{ color: "#38bdf8", fontWeight: 700, fontSize: "14px", letterSpacing: "1px" }}>INTERFACE 02: NIGHT HUD DRIVER DISPLAY</span>
+            <button
+              onClick={() => setActiveView("overview")}
+              style={{ background: "#1e293b", color: "#fff", border: "1px solid #334155", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: 600, fontSize: "13px" }}
+            >
+              ← Back to Radar Dashboard
+            </button>
+          </div>
+          <NightHud />
+        </div>
+      )}
+      {activeView === "careem" && (
+        <div style={{ position: "relative" }}>
+          <div style={{ background: "#0b1220", padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+            <span style={{ color: "#22c55e", fontWeight: 700, fontSize: "14px", letterSpacing: "1px" }}>INTERFACE 03: CAREEM / RIDE SAFETY SDK</span>
+            <button
+              onClick={() => setActiveView("overview")}
+              style={{ background: "#1e293b", color: "#fff", border: "1px solid #334155", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: 600, fontSize: "13px" }}
+            >
+              ← Back to Radar Dashboard
+            </button>
+          </div>
+          <SafetyOverlay />
+        </div>
+      )}
+      {activeView === "police" && (
+        <div style={{ position: "relative" }}>
+          <div style={{ background: "#0b1220", padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+            <span style={{ color: "#f59e0b", fontWeight: 700, fontSize: "14px", letterSpacing: "1px" }}>INTERFACE 04: NHMP POLICE COMMAND CONSOLE</span>
+            <button
+              onClick={() => setActiveView("overview")}
+              style={{ background: "#1e293b", color: "#fff", border: "1px solid #334155", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: 600, fontSize: "13px" }}
+            >
+              ← Back to Radar Dashboard
+            </button>
+          </div>
+          <Suspense fallback={<div style={{ padding: "40px", textAlign: "center", color: "#94a3b8" }}>Loading Command Console...</div>}>
+            <CommandConsole />
+          </Suspense>
+        </div>
+      )}
+      {activeView === "overview" && (
       <main>
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
@@ -539,6 +609,117 @@ function Dashboard() {
             Understand the model <Arrow diagonal />
           </a>
         </div>
+
+        {/* 5-Interface Interactive Suite Navigation for Judges */}
+        <section style={{ maxWidth: "1280px", margin: "0 auto 2.5rem", padding: "0 1.5rem" }} aria-label="Explore All 5 Interfaces">
+          <div style={{ background: "rgba(15, 23, 42, 0.75)", border: "1px solid rgba(56, 189, 248, 0.25)", borderRadius: "12px", padding: "1.25rem 1.5rem", boxShadow: "0 10px 30px rgba(0,0,0,0.4)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem", marginBottom: "1rem" }}>
+              <div>
+                <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "1.5px", color: "#38bdf8", textTransform: "uppercase" }}>Complete SafarGuard Ecosystem</span>
+                <h3 style={{ margin: "4px 0 0", fontSize: "1.25rem", color: "#f8fafc", fontFamily: "var(--font-heading)" }}>EXPLORE ALL 5 PRODUCTION INTERFACES (EMBEDDED)</h3>
+              </div>
+              <span style={{ background: "rgba(56, 189, 248, 0.15)", color: "#38bdf8", padding: "4px 10px", borderRadius: "999px", fontSize: "12px", fontWeight: 600 }}>Zero 404s · 1-Click View Switcher</span>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "10px" }}>
+              <button
+                type="button"
+                onClick={() => { setActiveView("overview"); window.location.hash = "#corridors" }}
+                style={{
+                  background: activeView === "overview" ? "linear-gradient(135deg, #0369a1, #0284c7)" : "rgba(30, 41, 59, 0.8)",
+                  border: activeView === "overview" ? "1px solid #38bdf8" : "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: "8px",
+                  padding: "12px 14px",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  color: "#fff",
+                  transition: "all 0.2s ease"
+                }}
+              >
+                <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600 }}>INTERFACE 01</div>
+                <div style={{ fontSize: "14px", fontWeight: 700, marginTop: "2px" }}>Web Corridor Radar</div>
+                <div style={{ fontSize: "11px", color: "#cbd5e1", marginTop: "4px" }}>ESRI Dark Map · Live Telemetry</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveView("nighthud")}
+                style={{
+                  background: activeView === "nighthud" ? "linear-gradient(135deg, #0369a1, #0284c7)" : "rgba(30, 41, 59, 0.8)",
+                  border: activeView === "nighthud" ? "1px solid #38bdf8" : "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: "8px",
+                  padding: "12px 14px",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  color: "#fff",
+                  transition: "all 0.2s ease"
+                }}
+              >
+                <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600 }}>INTERFACE 02</div>
+                <div style={{ fontSize: "14px", fontWeight: 700, marginTop: "2px" }}>Night HUD Mode</div>
+                <div style={{ fontSize: "11px", color: "#cbd5e1", marginTop: "4px" }}>OLED Black · Spoken Urdu TTS</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveView("careem")}
+                style={{
+                  background: activeView === "careem" ? "linear-gradient(135deg, #0369a1, #0284c7)" : "rgba(30, 41, 59, 0.8)",
+                  border: activeView === "careem" ? "1px solid #38bdf8" : "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: "8px",
+                  padding: "12px 14px",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  color: "#fff",
+                  transition: "all 0.2s ease"
+                }}
+              >
+                <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600 }}>INTERFACE 03</div>
+                <div style={{ fontSize: "14px", fontWeight: 700, marginTop: "2px" }}>Careem / Ride SDK</div>
+                <div style={{ fontSize: "11px", color: "#cbd5e1", marginTop: "4px" }}>Live Driver Advisory & Surge</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveView("police")}
+                style={{
+                  background: activeView === "police" ? "linear-gradient(135deg, #0369a1, #0284c7)" : "rgba(30, 41, 59, 0.8)",
+                  border: activeView === "police" ? "1px solid #38bdf8" : "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: "8px",
+                  padding: "12px 14px",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  color: "#fff",
+                  transition: "all 0.2s ease"
+                }}
+              >
+                <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600 }}>INTERFACE 04</div>
+                <div style={{ fontSize: "14px", fontWeight: 700, marginTop: "2px" }}>NHMP Command Center</div>
+                <div style={{ fontSize: "11px", color: "#cbd5e1", marginTop: "4px" }}>Patrol Dispatch & Convoys</div>
+              </button>
+
+              <a
+                href="https://safarguard.streamlit.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: "linear-gradient(135deg, #059669, #10b981)",
+                  border: "1px solid #34d399",
+                  borderRadius: "8px",
+                  padding: "12px 14px",
+                  textAlign: "left",
+                  color: "#fff",
+                  textDecoration: "none",
+                  display: "block",
+                  transition: "all 0.2s ease"
+                }}
+              >
+                <div style={{ fontSize: "11px", color: "#d1fae5", fontWeight: 600 }}>INTERFACE 05 (BACKEND) ↗</div>
+                <div style={{ fontSize: "14px", fontWeight: 700, marginTop: "2px" }}>AI Physics Core</div>
+                <div style={{ fontSize: "11px", color: "#ecfdf5", marginTop: "4px" }}>Streamlit Engine & Live ML Models</div>
+              </a>
+            </div>
+          </div>
+        </section>
 
         <section
           className="corridor-section section-shell"
@@ -1133,6 +1314,7 @@ function Dashboard() {
           </div>
         </section>
       </main>
+      )}
       <Footer />
     </div>
   )

@@ -118,7 +118,7 @@ h2 { font-family: var(--display); font-size: clamp(36px, 3.25vw, 52px); font-wei
 .corridor-search kbd { font: 400 10px var(--mono); padding: 1px 5px; border: 1px solid var(--line); }
 .table-scroll { position: relative; overflow-x: auto; }
 .corridor-table { border-collapse: collapse; text-align: left; width: 100%; min-width: 760px; }
-.corridor-table th { padding: 17px 14px; font: 400 8px var(--mono); letter-spacing: .04em; color: var(--grey); border-bottom: 1px solid var(--line); white-space: nowrap; }
+.corridor-table th { padding: 17px 14px; font: 600 11px var(--mono); letter-spacing: .06em; color: var(--grey); border-bottom: 1px solid var(--line); white-space: nowrap; }
 .corridor-table th:first-child { padding-left: 20px; width: 30%; }
 .corridor-table th:nth-child(2) { width: 16%; }
 .corridor-table th:nth-child(3) { width: 14%; }
@@ -133,15 +133,15 @@ h2 { font-family: var(--display); font-size: clamp(36px, 3.25vw, 52px); font-wei
 .route-badge { min-width: 49px; min-height: 34px; border: 1px solid #acb6ac; display: grid; place-items: center; font: 500 11px var(--mono); }
 .selected-row .route-badge { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .route-cell > span:last-child { display: flex; flex-direction: column; gap: 6px; }
-.route-cell strong { font-size: 14px; font-weight: 600; }
-.route-cell small { color: var(--grey); font-size: 10px; }
+.route-cell strong { font-size: 15px; font-weight: 600; }
+.route-cell small { color: var(--grey); font-size: 12px; }
 .table-number { font: 500 24px var(--display); }
-.table-number small { font: 400 9px var(--mono); color: var(--grey); }
+.table-number small { font: 400 11px var(--mono); color: var(--grey); }
 .visibility-meter { display: block; height: 3px; width: 65px; background: #d6dbd4; margin-top: 8px; }
 .visibility-meter i { display: block; height: 100%; background: var(--cyan); }
 .speed-ceiling { color: var(--cyan); font-size: 29px; }
-.condition-label { font: 400 8px var(--mono); color: var(--ink); white-space: nowrap; display: inline-flex; align-items: center; gap: 7px; }
-.condition-label i { width: 5px; height: 5px; background: var(--cyan); }
+.condition-label { font: 600 11px var(--mono); color: var(--ink); white-space: nowrap; display: inline-flex; align-items: center; gap: 7px; }
+.condition-label i { width: 6px; height: 6px; background: var(--cyan); }
 .condition-moderate { color: var(--green); }
 .condition-moderate i { background: var(--green); }
 .select-route { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--line); background: transparent; }
