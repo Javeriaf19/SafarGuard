@@ -292,7 +292,37 @@ function RoadDiagram({
 }
 
 function App() {
-  const pathname = window.location.pathname.replace(/\/$/, "") || "/"
+  const [pathname, setPathname] = useState(() => window.location.pathname.replace(/\/$/, "") || "/")
+
+  useEffect(() => {
+    const handlePop = () => {
+      setPathname(window.location.pathname.replace(/\/$/, "") || "/")
+    }
+    const handleClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest("a")
+      if (!target) return
+      const href = target.getAttribute("href")
+      if (
+        href &&
+        href.startsWith("/") &&
+        !href.startsWith("/#") &&
+        !href.startsWith("/data") &&
+        target.target !== "_blank"
+      ) {
+        e.preventDefault()
+        window.history.pushState({}, "", href)
+        setPathname(href.replace(/\/$/, "") || "/")
+        window.scrollTo(0, 0)
+      }
+    }
+    window.addEventListener("popstate", handlePop)
+    document.addEventListener("click", handleClick)
+    return () => {
+      window.removeEventListener("popstate", handlePop)
+      document.removeEventListener("click", handleClick)
+    }
+  }, [])
+
   if (pathname === "/command-console")
     return (
       <Suspense
